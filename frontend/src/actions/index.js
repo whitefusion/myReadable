@@ -4,22 +4,23 @@ export const DELETE_POST = 'DELETE_POST'
 export const ADD_COMMENT = 'ADD_COMMENT'
 export const EDIT_COMMENT = 'EDIT_COMMENT'
 export const DELETE_COMMENT = 'DELETE_COMMENT'
+export const DELETE_PARENT = 'DELETE_PARENT'
 
-function addPost({id,title,author,content}){
+function addPost({title,author,body,category}){
     return {
         type:ADD_POST,
-        id,
         title,
         author,
-        content
+        body,
+        category
     }
 }
 
-function editPost({id,content}){
+function editPost({id,body}){
     return {
         type: EDIT_POST,
         id,
-        content
+        body
     }
 }
 
@@ -30,21 +31,19 @@ function deletePost({id}){
     }
 }
 
-function addComment({id,content, author, time, parentId}){
+function addComment({id,body, author, parentId}){
     return {
         type: ADD_COMMENT,
-        id,
-        content,
+        body,
         author,
-        time,
         parentId
     }
 }
 
-function editComment({id,content}){
+function editComment({id,body}){
     return {
         type: EDIT_COMMENT,
-        content,
+        body,
         id
     }
 }
@@ -56,6 +55,12 @@ function deleteComment({id}) {
     }
 }
 
+function deleteParent({parentId}) {
+    return {
+        type : DELETE_PARENT,
+        parentId
+    }
+}
 module.exports = {
     addPost,
     editPost,
