@@ -105,7 +105,7 @@ app.get('/', (req, res) => {
 
     DELETE /comments/:id
       USAGE:
-        Sets a comment's deleted flag to 'true'
+        Sets a comments deleted flag to 'true'
  </pre>
   `
 
@@ -124,7 +124,6 @@ app.use((req, res, next) => {
     })
   }
 })
-
 
 app.get('/categories', (req, res) => {
     categories.getAll(req.token)
