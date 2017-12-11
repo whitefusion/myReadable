@@ -24,29 +24,41 @@ export class HeadBar extends React.Component {
     });
   }
 
-  render() {
-    return (
+  renderDropDown = () => (
       <div>
         <Navbar color="faded" light expand="md">
-          <NavbarBrand href="/">READABLE</NavbarBrand>
+          <NavbarBrand href="/">Readable</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
-              <NavItem>
-                  <NavLink href="#">Add</NavLink>
-              </NavItem>
-              <UncontrolledDropdown nav inNavbar>
+              <UncontrolledDropdown nav>
                 <DropdownToggle nav caret>
-                  Options
+                  Categories
                 </DropdownToggle>
-                <DropdownMenu>
-                  {this.props.catList ? this.props.catList.map((c) => <DropdownItem>{c.name}</DropdownItem>) : ('')}
+                <DropdownMenu >
+                  <DropdownItem key={0}>
+                    All
+                  </DropdownItem>
+                  <DropdownItem divider />
+                  {
+                    this.props.catList ?
+                    this.props.catList.map((c,index) => (<DropdownItem key={index}>{c.name}</DropdownItem>))
+                    : ('')
+                  }
                 </DropdownMenu>
               </UncontrolledDropdown>
+              <NavItem>
+                <NavLink href="#">Add</NavLink>
+              </NavItem>
             </Nav>
           </Collapse>
         </Navbar>
       </div>
+  )
+
+  render() {
+    return (
+      this.renderDropDown()
     );
   }
 }
