@@ -12,7 +12,7 @@ import {
   DropdownMenu,
   DropdownItem } from 'reactstrap';
 
-export class HeadBar extends React.Component {
+class HeadBar extends React.Component {
 
   state = {
     isOpen : false
@@ -62,3 +62,5 @@ export class HeadBar extends React.Component {
     );
   }
 }
+
+export default HeadBar
