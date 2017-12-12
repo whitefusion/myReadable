@@ -7,7 +7,7 @@ import {
 
 import {generateId,generateCommentId} from '../utils/utility'
 
-export function comment (state={},action){
+export default function comment (state={},action){
     switch(action.type){
         case ADD_COMMENT:
             const {author,body,parentId} = action

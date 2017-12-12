@@ -1,12 +1,14 @@
 import {
     ADD_POST,
     EDIT_POST,
-    DELETE_POST
+    DELETE_POST,
+    RECEIVE_POST
 } from '../actions'
 
 import {generateId,generateCommentId} from '../utils/utility'
 
-export function post (state={},action){
+export default function post (state={},action){
+    console.log(action.type)
     switch(action.type){
         case ADD_POST:
             const id = generateId()
@@ -32,6 +34,11 @@ export function post (state={},action){
                     deleted:true
                 }
             }
+        case RECEIVE_POST:
+            console.log('received ! ')
+            const reloaded= {}
+            action.posts.forEach((p) => reloaded[p.id]=p)
+            return {...state, ...reloaded}
         default:
             return state
     }
