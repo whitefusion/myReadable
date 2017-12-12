@@ -35,3 +35,13 @@ const deleteParent = ({parentId}) => (
     }
 )
 
+export {
+    addComment,
+    editComment,
+    deleteComment,
+    deleteParent,
+    ADD_COMMENT,
+    EDIT_COMMENT,
+    DELETE_PARENT,
+    DELETE_COMMENT
+}

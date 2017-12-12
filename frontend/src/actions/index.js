@@ -2,6 +2,8 @@ export {
     addPost,
     editPost,
     deletePost,
+    fetchPost,
+    receivePost,
     ADD_POST,
     EDIT_POST,
     DELETE_POST,

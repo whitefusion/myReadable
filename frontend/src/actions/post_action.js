@@ -1,3 +1,5 @@
+import * as api from '../utils/api'
+
 const ADD_POST = 'ADD_POST'
 const EDIT_POST = 'EDIT_POST'
 const DELETE_POST = 'DELETE_POST'
@@ -28,4 +30,29 @@ const deletePost = ({id}) => (
     }
 )
 
+const receivePost = (posts) => (
+    {
+        type: RECEIVE_POST,
+        posts
+    }
+)
 
+const fetchPost = () => dispatch => (
+    api
+    .getAllPosts()
+    .then(posts => {
+        console.log('dispatching')
+        dispatch(receivePost(posts))})
+)
+
+export {
+    fetchPost,
+    editPost,
+    addPost,
+    deletePost,
+    receivePost,
+    ADD_POST,
+    EDIT_POST,
+    DELETE_POST,
+    RECEIVE_POST
+}

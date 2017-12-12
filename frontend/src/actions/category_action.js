@@ -13,3 +13,9 @@ const fetchCates = () => dispatch => (
     .getCategories()
     .then(cats => dispatch(receiveCate(cats)))
 )
+
+export {
+    RECEIVE_CATE,
+    receiveCate,
+    fetchCates
+}
