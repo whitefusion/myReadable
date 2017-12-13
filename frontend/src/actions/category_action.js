@@ -8,7 +8,7 @@ const receiveCate = (cats) => (
     }
 )
 
-const fetchCates = () => dispatch => (
+const fetchCate = () => dispatch => (
     api
     .getCategories()
     .then(cats => dispatch(receiveCate(cats)))
@@ -17,5 +17,5 @@ const fetchCates = () => dispatch => (
 export {
     RECEIVE_CATE,
     receiveCate,
-    fetchCates
+    fetchCate
 }

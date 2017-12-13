@@ -37,12 +37,10 @@ const receivePost = (posts) => (
     }
 )
 
-const fetchPost = () => dispatch => (
+const fetchPost = () => dispatch =>(
     api
     .getAllPosts()
-    .then(posts => {
-        console.log('dispatching')
-        dispatch(receivePost(posts))})
+    .then(posts => dispatch(receivePost(posts)))
 )
 
 export {

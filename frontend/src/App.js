@@ -1,28 +1,27 @@
-import React, { Component } from 'react';
-import './App.css';
+import React, { Component } from 'react'
+import './App.css'
+import HeadBar from './components/HeadBar'
+import Comment from './components/Comment'
+import Post from './components/Post'
 import {connect} from 'react-redux'
-import {getCategories} from './utils/api'
-import * as action from './actions'
-import {HeadBar} from './components'
+import {fetchCate} from './actions'
 
 class App extends Component {
-    state = {
-        allCats: []
-    }
-
     componentDidMount(){
-        getCategories().then((cats)=>{
-            this.setState({allCats:cats.categories})
-        })
+        this.props.fetch()
     }
 
     render() {
         return (
           <div className="App">
-            <HeadBar catList={this.state.allCats}/>
+            <HeadBar
+            catList={this.props.category ?
+                this.props.category.categories
+                : ('')}/>
+            <Post />
           </div>
         )
     }
 }
 
-export default App;
+export default connect((state)=>({category:state.category}), ({fetch:fetchCate}))(App);

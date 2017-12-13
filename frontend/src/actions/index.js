@@ -23,6 +23,7 @@ export {
 } from './comment_action'
 
 export {
+    fetchCate,
     receiveCate,
     RECEIVE_CATE
 } from './category_action'

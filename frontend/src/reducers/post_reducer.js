@@ -35,10 +35,9 @@ export default function post (state={},action){
                 }
             }
         case RECEIVE_POST:
-            console.log('received ! ')
             const reloaded= {}
             action.posts.forEach((p) => reloaded[p.id]=p)
-            return {...state, ...reloaded}
+            return reloaded
         default:
             return state
     }
