@@ -2,3 +2,109 @@ body,html {
     width: 100%;
     margin: auto;
 }
+
+.App {
+}
+
+/*
+ * HeadBar
+ */
+
+ #headbar {
+ }
+
+/*
+ * Post
+ */
+
+#post-main {
+}
+
+#post-body {
+}
+
+#edit-modal {
+
+}
+
+
+/*
+ * Post Card
+ */
+.row {
+
+}
+
+.post-col {
+    margin: 20px auto;
+}
+
+.post {
+    margin: auto;
+}
+
+.title,.vote-sign,.vote,.score {
+    display: inline;
+}
+
+.vote {
+    font-size: 0.8em;
+    float: right;
+}
+
+.score {
+    color: #3939cc;
+}
+
+.card {
+    border-radius: 30px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-around;
+    border-top: 1px solid #dbdbdd;
+    padding-top: 10px;
+}
+
+.post-btn {
+    width: 120px;
+}
+
+/*
+ * Comment
+ */
+
+.comment {
+}
+
+.comment-form {
+    display: block;
+
+}
+
+.comment-input {
+    margin: 0;
+    padding: 0;
+}
+.comment-submit {
+    width: 100%;
+    margin: 0;
+}
+
+#no-comments {
+    color: gray;
+    text-align: center;
+}
+
+.comment-btn {
+    display: inline-block;
+    width: auto;
+    float: right ;
+    margin-right: 3px;
+    margin-top: -7px;
+}
+
+#comment-body {
+    display: inline-block;
+}
