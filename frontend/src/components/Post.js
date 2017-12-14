@@ -1,27 +1,44 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+
 import {
     fetchPost,
     editPost,
     deletePost
 } from '../actions'
 
+import PostCard from './PostCard'
+
+import {
+         Row,
+         Col
+       } from 'reactstrap';
+
 class Post extends Component {
+
     componentDidMount(){
         this.props.fetch()
     }
 
+    renderCard = (p) => (
+          <Col key={p.id} sm="12" md={{ size: 8, offset: 2 }} className='col'>
+            <PostCard content={p}/>
+          </Col>
+    )
+
     render() {
         return(
-            <div>
+            <Row className='row'>
             {
                 this.props.post ?
-                Object.entries(this.props.post).map(([k,v])=> {
-                    return (<div key={k}>{v.body}</div>)
-                })
+                Object.entries(this.props.post).map(([k,v])=>
+                    (
+                        this.renderCard(v)
+                    )
+                )
                 : ('')
             }
-            </div>
+            </Row>
         )
     }
 }

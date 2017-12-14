@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {
   Collapse,
   Navbar,
@@ -12,7 +12,9 @@ import {
   DropdownMenu,
   DropdownItem } from 'reactstrap';
 
-class HeadBar extends React.Component {
+import PostModal from './PostModal'
+
+class HeadBar extends Component {
 
   state = {
     isOpen : false
@@ -48,7 +50,8 @@ class HeadBar extends React.Component {
                 </DropdownMenu>
               </UncontrolledDropdown>
               <NavItem>
-                <NavLink href="#">Add</NavLink>
+                <PostModal name="Add" title = "New post"
+                content={{}} />
               </NavItem>
             </Nav>
           </Collapse>
