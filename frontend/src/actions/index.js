@@ -15,11 +15,12 @@ export {
     editComment,
     deleteComment,
     deleteParent,
+    fetchComment,
     ADD_COMMENT,
     EDIT_COMMENT,
     DELETE_COMMENT,
     DELETE_PARENT,
-    RECEIVE_COMM
+    RECEIVE_COMMENT
 } from './comment_action'
 
 export {
