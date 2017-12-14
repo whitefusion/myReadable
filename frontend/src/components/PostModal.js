@@ -17,7 +17,9 @@ class PostModal extends Component {
     const p = this.props.content
     return (
       <div >
-        <Button color="primary" size='sm' className='button' onClick={this.toggle}>{this.props.name}</Button>
+        <div className={this.props.btnBlockCls}>
+        <Button color="primary" size="sm" className={this.props.btnClass} onClick={this.toggle}>{this.props.name}</Button>
+        </div>
         <Modal size='lg' id="edit-modal" isOpen={this.state.modal} toggle={this.toggle} >
           <ModalHeader toggle={this.toggle}>{this.props.title}</ModalHeader>
           <Form >
@@ -41,7 +43,7 @@ class PostModal extends Component {
             </Col>
           </Form>
           <ModalFooter>
-            <Button color="primary" onClick={this.toggle}> Submit </Button>{' '}
+            <Button color='success' onClick={this.toggle}> Submit </Button>{' '}
             <Button color="secondary" onClick={this.toggle}>Cancel</Button>
           </ModalFooter>
         </Modal>

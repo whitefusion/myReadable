@@ -21,14 +21,14 @@ class Post extends Component {
     }
 
     renderCard = (p) => (
-          <Col key={p.id} sm="12" md={{ size: 8, offset: 2 }} className='col'>
+          <Col key={p.id} sm="12" md={{ size: 8, offset: 2 }} className='post-col'>
             <PostCard content={p}/>
           </Col>
     )
 
     render() {
         return(
-            <Row className='row'>
+            <Row id='post-main'>
             {
                 this.props.post ?
                 Object.entries(this.props.post).map(([k,v])=>

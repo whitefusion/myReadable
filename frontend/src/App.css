@@ -1,6 +1,5 @@
 body,html {
-    width: 100%;
-    margin: auto;
+    height:100%;
 }
 
 .App {
@@ -27,13 +26,29 @@ body,html {
 
 }
 
+.new-post-btn-container {
+    position: fixed;
+    right:30px;
+    bottom: 25px;
+}
+
+.new-post-btn {
+    display: block;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-image: url('./icons/add.svg');
+    font-size: 0;
+    cursor:pointer;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 50px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.2), 0 3px 6px rgba(0,0,0,0.23);
+}
 
 /*
  * Post Card
  */
-.row {
-
-}
 
 .post-col {
     margin: 20px auto;
@@ -75,21 +90,18 @@ body,html {
  * Comment
  */
 
-.comment {
-}
-
-.comment-form {
-    display: block;
-
+#comment-card-btn-container {
+    width: 100%;
+    margin-top: 20px;
 }
 
 .comment-input {
-    margin: 0;
-    padding: 0;
+    margin: auto;
 }
+
 .comment-submit {
     width: 100%;
-    margin: 0;
+    margin-bottom: 10px;
 }
 
 #no-comments {
@@ -97,6 +109,7 @@ body,html {
     text-align: center;
 }
 
+/* for both comment edit and delete */
 .comment-btn {
     display: inline-block;
     width: auto;

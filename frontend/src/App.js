@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import './App.css'
 import HeadBar from './components/HeadBar'
-import Comment from './components/Comment'
 import Post from './components/Post'
 import {connect} from 'react-redux'
 import {fetchCate} from './actions'
+import PostModal from './components/PostModal'
 
 class App extends Component {
     componentDidMount(){
@@ -18,7 +18,9 @@ class App extends Component {
             catList={this.props.category ?
                 this.props.category.categories
                 : ('')}/>
-            <Post />
+            <Post className='post'/>
+            <PostModal name="add-new-post"
+            btnBlockCls="new-post-btn-container" btnClass="new-post-btn" title="New Post"/>
           </div>
         )
     }

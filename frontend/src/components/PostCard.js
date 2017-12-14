@@ -50,9 +50,9 @@ class PostCard extends Component {
               <CardSubtitle>By {p.author}, {getDate(p.timestamp)}</CardSubtitle>
               <CardText>{p.body}</CardText>
               <div className="button-container">
-                <Button color='primary' size="sm" className='button' onClick={this.toggleComment}> Comment </Button>
-                <PostModal title='Edit Post' name='Edit' content={p}/>
-                <Button color='danger' size="sm" className='button'> Delete </Button>
+                <Button color='primary' size="sm" className='post-btn' onClick={this.toggleComment}> Comment </Button>
+                <PostModal btnClass='post-btn' title='Edit Post' name='Edit' content={p}/>
+                <Button color='danger' size="sm" className='post-btn'> Delete </Button>
               </div>
               {this.state.showComment ?
                 <Comment id={p.id}/> : ('')}
