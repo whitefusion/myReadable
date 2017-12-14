@@ -2,7 +2,8 @@ import {
     ADD_COMMENT,
     EDIT_COMMENT,
     DELETE_COMMENT,
-    DELETE_PARENT
+    DELETE_PARENT,
+    RECEIVE_COMMENT
 } from '../actions'
 
 import {generateId,generateCommentId} from '../utils/utility'
@@ -39,6 +40,12 @@ export default function comment (state={},action){
                     temp_state[k].parentDeleted = true
             })
             return temp_state
+        case RECEIVE_COMMENT:
+            console.log(action.comments)
+            if(action.comments.length)
+                return {...state, [action.comments[0].parentId]:action.comments}
+            else
+                return state
         default:
             return state
     }

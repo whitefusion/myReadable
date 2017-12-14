@@ -11,3 +11,7 @@ export const getCategories = () =>
 export const getAllPosts = () =>
     fetch(`${base}/posts`,{headers})
     .then(res => res.json())
+
+export const getCommentById = (id) =>
+    fetch(`${base}/posts/${id}/comments`,{headers})
+    .then(res=>res.json())
