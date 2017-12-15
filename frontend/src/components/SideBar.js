@@ -14,8 +14,10 @@ class SideBar extends Component {
                 <FormGroup>
                   <Label>Sort By:</Label>
                   <Input className="sort-select" type="select" name="select" id="sortBy">
-                    <option>post date</option>
-                    <option>vote score</option>
+                    <option>post date : old to new</option>
+                    <option>post date : new to old</option>
+                    <option>vote score : low to high</option>
+                    <option>vote score : high to low</option>
                   </Input>
                 </FormGroup>
               </Form>

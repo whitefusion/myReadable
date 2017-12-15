@@ -50,6 +50,12 @@ body,html {
 #edit-modal {
 }
 
+.post-badge {
+    margin-left: 5px;
+    line-height: 1em;
+    width: 80px;
+    margin-top: 0;
+}
 .new-post-btn-container {
     position: fixed;
     right:30px;

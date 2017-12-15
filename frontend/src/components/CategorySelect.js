@@ -11,14 +11,18 @@ class CategorySelect extends Component {
     render(){
         const catList = this.props.category.categories
         return (
-            <Input className="category-select" type="select" name="select" id="selectCategory">
+            <Input className="category-select"
+            type="select" name="select"
+            id="selectCategory"
+            value={this.props.currCat}
+            onChange={this.props.changeHandler}>
                 {
                     this.props.showAll ?
-                    <option key="0">All</option>
+                    <option value="All" key="0">All</option>
                     : ('')
                 }
                 {catList ?
-                 catList.map((c,index) => (<option key={index+1}>{c.name}</option>))
+                 catList.map((c,index) => (<option value={c.name} key={index+1}>{c.name}</option>))
                 : ('')}
             </Input>
         )
