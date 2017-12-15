@@ -1,10 +1,15 @@
 import React, {Component} from 'react'
 import {ListGroupItem, Button,Modal, ModalHeader, ModalBody, ModalFooter ,
         Form, FormGroup, Label,Input, Col} from 'reactstrap'
+import {updateComment,saveRemoveComment} from '../actions'
+import { connect } from 'react-redux'
 
 class CommentItem extends Component {
+    c = this.props.content
+
     state = {
-      modal: false
+      modal: false,
+      currComment: this.c ? this.c.body:'',
     }
 
     toggle = () => {
@@ -13,12 +18,39 @@ class CommentItem extends Component {
         });
     }
 
+    handleChange = (evt) => {
+        const v = evt.target.value
+        const t = evt.target.name
+        switch(t) {
+            case "comment-body":
+                this.setState({currComment: v})
+                return
+            default:
+                return
+        }
+    }
+
+    handleClick = (evt) => {
+      evt.preventDefault()
+      this.props.edit({
+        id:this.c.id,
+        body:this.state.currComment,
+        parentId:this.c.parentId
+      })
+      this.toggle()
+    }
+
+    handleDelete = (evt) => {
+      evt.preventDefault()
+      this.props.remove(this.c.id,this.c.parentId)
+    }
+
     render () {
-        const c = this.props.content
+        const c = this.c
         return (
             <ListGroupItem>
                 <div id="comment-body">{c.author} : {c.body}</div>
-                <Button className='comment-btn' color="danger">delete</Button>
+                <Button className='comment-btn' color="danger" onClick={this.handleDelete}>delete</Button>
                 <Button color="primary" className='comment-btn' onClick={this.toggle}>edit</Button>
                   <div >
                     <Modal size='lg' id="edit-modal" isOpen={this.state.modal} toggle={this.toggle} >
@@ -26,20 +58,16 @@ class CommentItem extends Component {
                       <Form >
                       <Col sm={11}>
                         <FormGroup>
-                          <Label for="post-author">Author</Label>
-                          <Input type="text" name="post-author"
-                                 defaultValue={c ? c.author : ' '} placeholder="post author"/>
-                        </FormGroup>
-                        <FormGroup>
-                          <Label for="post-body">Body</Label>
-                          <Input id="post-body" type="textarea"
-                                 rows="3" name="text"
-                                 defaultValue={c ? c.body : ' '} placeholder="post content"/>
+                          <Label >Body</Label>
+                          <Input type="textarea"
+                                 rows="3" name="comment-body"
+                                 value={this.state.currComment}
+                                 onChange={this.handleChange}/>
                         </FormGroup>
                       </Col>
                       </Form>
                       <ModalFooter>
-                        <Button color='success' onClick={this.toggle}> Submit </Button>{' '}
+                        <Button color='success' onClick={this.handleClick}> Submit </Button>{' '}
                         <Button color="secondary" onClick={this.toggle}>Cancel</Button>
                       </ModalFooter>
                     </Modal>
@@ -49,4 +77,5 @@ class CommentItem extends Component {
     }
 }
 
-export default CommentItem
+export default connect((state)=>({comment:state.comment}),
+                                 ({edit: updateComment, remove: saveRemoveComment }))(CommentItem);

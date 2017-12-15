@@ -5,36 +5,49 @@ const DELETE_COMMENT = 'DELETE_COMMENT'
 const DELETE_PARENT = 'DELETE_PARENT'
 const RECEIVE_COMMENT = 'RECEIVE_COMMENT'
 
-const addComment = ({id,body, author, parentId}) => (
+const addComment = (comment) => (
     {
         type: ADD_COMMENT,
-        body,
-        author,
-        parentId
+        comment
     }
 )
 
-const editComment = ({id,body}) => (
+const createComment = (c) => dispatch => {
+    api
+    .upLoadComment(c)
+    .then(res => dispatch(addComment(c)))
+}
+
+const editComment = ({id,body,parentId}) => (
     {
         type: EDIT_COMMENT,
+        id,
         body,
-        id
-    }
-)
-
-const deleteComment = ({id}) => (
-    {
-        type: DELETE_COMMENT,
-        id
-    }
-)
-
-const deleteParent = ({parentId}) => (
-    {
-        type : DELETE_PARENT,
         parentId
     }
 )
+
+const updateComment = (comment) => dispatch => (
+    api
+    .saveComment(comment)
+    .then(res => dispatch(editComment({id:comment.id,
+                                        body:comment.body,
+                                        parentId:comment.parentId})))
+)
+
+const deleteComment = (id,parentId) => (
+    {
+        type: DELETE_COMMENT,
+        id,
+        parentId
+    }
+)
+
+const saveRemoveComment = (id,parentId) => dispatch => {
+    api
+    .removeComment(id)
+    .then(res => dispatch(deleteComment(id,parentId)))
+}
 
 const receiveComment = (comments) => (
     {
@@ -53,8 +66,10 @@ export {
     addComment,
     editComment,
     deleteComment,
-    deleteParent,
     fetchComment,
+    createComment,
+    updateComment,
+    saveRemoveComment,
     ADD_COMMENT,
     EDIT_COMMENT,
     DELETE_PARENT,

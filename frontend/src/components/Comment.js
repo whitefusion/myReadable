@@ -1,34 +1,90 @@
 import React, {Component} from 'react'
-import { Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Col, Row, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import { connect } from 'react-redux'
-import {fetchComment} from '../actions/'
+import {fetchComment, createComment} from '../actions/'
 import CommentItem from './CommentItem'
+import {generateCommentId} from '../utils/utility'
 
 class Comment extends Component {
+
+    state = {
+        currCommnet: '',
+        currAuthor: ''
+    }
+
     componentDidMount() {
         this.props.fetch(this.props.id)
     }
 
+    handleChange = (evt) => {
+        const v = evt.target.value
+        const t = evt.target.name
+        switch(t) {
+            case "comment-author":
+                this.setState({currAuthor: v})
+                return
+            case "comment-body":
+                this.setState({currComment: v})
+                return
+            default:
+                return
+        }
+    }
+
+    handleSubmit = (evt) => {
+        evt.preventDefault();
+        const tempId = generateCommentId()
+        this.props.add({
+            id:tempId,
+            parentId: this.props.id,
+            timestamp: Date.now(),
+            author: this.state.currAuthor,
+            body: this.state.currComment
+        })
+        this.clearState()
+    }
+
+    clearState = () => {
+        this.setState({currAuthor: ''})
+        this.setState({currComment: ''})
+    }
+
     render() {
-        const currComments = this.props.comment[this.props.id]
-        console.log(currComments)
+        const allComments = this.props.comment[this.props.id]
+        const validComments = allComments ? allComments.filter((c) => !c.deleted):[]
         return(
             <div>
                 <Form id='comment-card-btn-container'>
+
                     <FormGroup row>
                       <Col sm="10" md={{ size: 10, offset: 1 }}>
                         <Input className='comment-input' type="textarea"
-                                name="text" id="exampleText"
-                                placeholder=" Your comment goes here ..."/>
+                                name="comment-body"
+                                value={this.state.currComment}
+                                onChange={this.handleChange}
+                                placeholder="Your comment goes here"/>
                       </Col>
                     </FormGroup>
-                    <Col sm="10" md={{ size: 8, offset: 2 }}>
-                    <Button color='success' className='comment-submit'> submit </Button>
-                    </Col>
+                    <FormGroup row>
+                      <Col md={{ size: 10, offset: 1 }}>
+                        <Row>
+                        <Col md="5">
+                        <Input className='comment-author'
+                                name="comment-author"
+                                value={this.state.currAuthor}
+                                onChange={this.handleChange}
+                                placeholder='Author'/>
+                        </Col>
+                        <Col md="3">
+                        <Button color='success' className='comment-submit' onClick={this.handleSubmit}> submit </Button>
+                        </Col>
+                        </Row>
+                      </Col>
+                    </FormGroup>
                 </Form>
                 {
-                    currComments ?
-                    (currComments.map((c) =>
+                    validComments.length ?
+                    (validComments.map((c) =>
                         (<CommentItem key={c.id} content={c} />)
                     ))
                     : (<p id="no-comments"> No comments for this post. </p>)
@@ -38,4 +94,4 @@ class Comment extends Component {
 }
 
 export default connect((state)=>({comment:state.comment}),
-                                 ({fetch:fetchComment}))(Comment);
+                                 ({fetch:fetchComment,add:createComment}))(Comment);

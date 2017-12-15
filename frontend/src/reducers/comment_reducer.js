@@ -2,44 +2,40 @@ import {
     ADD_COMMENT,
     EDIT_COMMENT,
     DELETE_COMMENT,
-    DELETE_PARENT,
     RECEIVE_COMMENT
 } from '../actions'
 
 import {generateId,generateCommentId} from '../utils/utility'
 
 export default function comment (state={},action){
+    let tempComments = {...state}, targetId = -1;
     switch(action.type){
         case ADD_COMMENT:
-            const {author,body,parentId} = action
+            const pId = action.comment.parentId
             return {
-                author,body,parentId,
-                id: generateCommentId(),
-                timestamp: Date.now()
+                ...state,
+                [pId]: state[pId].concat(action.comment)
             }
         case EDIT_COMMENT:
-            return {
-                ...state,
-                [action.id]: {
-                    ...state[action.id],
-                    body:action.body
+            tempComments[action.parentId].forEach((c,index) => {
+                if (c.id === action.id){
+                    targetId=index
                 }
-            }
-        case DELETE_COMMENT:
-            return {
-                ...state,
-                [action.id]:{
-                    ...state[action.id],
-                    deleted:true
-                }
-            }
-        case DELETE_PARENT:
-            let temp_state = {...state}
-            Object.keys(temp_state).forEach(k=>{
-                if(temp_state[k].parentId === action.parentId)
-                    temp_state[k].parentDeleted = true
             })
-            return temp_state
+            if(targetId >= 0){
+                tempComments[action.parentId][targetId].body=action.body
+            }
+            return tempComments
+        case DELETE_COMMENT:
+            tempComments[action.parentId].forEach((c,index) => {
+                if (c.id === action.id){
+                    targetId=index
+                }
+            })
+            if(targetId >= 0){
+                tempComments[action.parentId][targetId].deleted=true
+            }
+            return tempComments
         case RECEIVE_COMMENT:
             console.log(action.comments)
             if(action.comments.length)

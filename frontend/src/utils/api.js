@@ -33,7 +33,6 @@ export const upLoadPost = (post) => {
 }
 
 export const savePost = (post) => {
-    console.log(post)
     return fetch(`${base}/posts/${post.id}`,
     {
         method: "PUT",
@@ -53,4 +52,41 @@ export const removePost = (id)=> {
         method: "DELETE",
         headers
     })
+}
+
+export const upLoadComment = (comment) => {
+    return fetch(`${base}/comments`,
+    {
+        method: "POST",
+        headers: {
+            'Authorization': 'whatever',
+            'Accept': 'application/json',
+            'Content-type': 'application/json'
+        },
+        body: JSON.stringify(comment)
+    })
+    .then(res=>res.json())
+}
+
+export const saveComment = (comment) => {
+    return fetch(`${base}/comments/${comment.id}`,
+    {
+        method: "PUT",
+        headers: {
+            'Authorization': 'whatever',
+            'Accept': 'application/json',
+            'Content-type': 'application/json'
+        },
+        body: JSON.stringify({timestamp: Date.now(),body: comment.body})
+    })
+    .then(res=>res.json())
+}
+
+export const removeComment = (id) => {
+    return fetch(`${base}/comments/${id}`,
+    {
+        method: "DELETE",
+        headers
+    })
+    .then(res=>res.json())
 }
