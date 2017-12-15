@@ -5,15 +5,19 @@ const EDIT_POST = 'EDIT_POST'
 const DELETE_POST = 'DELETE_POST'
 const RECEIVE_POST = 'RECEIVE_POST'
 
-const addPost = ({title,author,body,category}) => (
+const addPost = (post) => (
     {
         type:ADD_POST,
-        title,
-        author,
-        body,
-        category
+        post
     }
 )
+
+const createPost = (post) => dispatch => {
+    return(
+    api
+    .upLoadPost(post)
+    .then(res => dispatch(addPost({...post,...res})))
+)}
 
 const editPost = ({id,body}) => (
     {
@@ -43,12 +47,15 @@ const fetchPost = () => dispatch =>(
     .then(posts => dispatch(receivePost(posts)))
 )
 
+
+
 export {
     fetchPost,
     editPost,
     addPost,
     deletePost,
     receivePost,
+    createPost,
     ADD_POST,
     EDIT_POST,
     DELETE_POST,

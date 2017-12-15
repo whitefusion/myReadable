@@ -7,23 +7,22 @@ import {
 
 import {generateId,generateCommentId} from '../utils/utility'
 
+import * as api from '../utils/utility'
+
 export default function post (state={},action){
     console.log(action.type)
     switch(action.type){
         case ADD_POST:
-            const id = generateId()
-            const {author,body,title,category} = action
+            console.log(action.post)
             return {...state,
-                [id] : {author,body,title,category,
-                    timestamp: Date.now(),id
+                    [action.post.id]:action.post
                 }
-            }
         case EDIT_POST:
             return {
                 ...state,
                 [action.id]: {
                     ...state[action.id],
-                    [action.body]:body
+                    body:action.body
                 }
             }
         case DELETE_POST:

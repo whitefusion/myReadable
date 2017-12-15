@@ -5,6 +5,7 @@ import { Card,
          CardTitle,
          CardSubtitle,
          CardText,
+         Badge
        } from 'reactstrap';
 import { getDate } from '../utils/utility.js'
 import PostModal from './PostModal'
@@ -33,7 +34,9 @@ class PostCard extends Component {
         const p = this.props.content
         return(
             <Card body className='card'>
+
               <CardTitle className='post-title'>
+
                 <p className='title'>{p.title}</p>
                 <div className='vote'>
                   {this.state.upVote ?
@@ -47,8 +50,12 @@ class PostCard extends Component {
                   }
                 </div>
               </CardTitle>
-              <CardSubtitle>By {p.author}, {getDate(p.timestamp)}</CardSubtitle>
-              <CardText>{p.body}</CardText>
+              <CardSubtitle>
+                By {p.author}, {getDate(p.timestamp)}
+                <Badge color="dark" className="post-badge" pill>{p.category}</Badge>
+              </CardSubtitle>
+              <CardText><pre>{p.body}</pre></CardText>
+
               <div className="button-container">
                 <Button color='primary' size="sm" className='post-btn' onClick={this.toggleComment}> Comment </Button>
                 <PostModal btnClass='post-btn' title='Edit Post' name='Edit' content={p}/>
