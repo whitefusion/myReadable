@@ -10,12 +10,19 @@ import { Card,
 import { getDate } from '../utils/utility.js'
 import Comment from './Comment'
 import EditModal from './EditModal'
+import { saveDeletePost } from '../actions'
+import {connect} from 'react-redux'
 
 class PostCard extends Component {
     state = {
       upVote: false,
       downVote: false,
       showComment: false
+    }
+
+    handleDelete = (evt) => {
+      evt.preventDefault();
+      this.props.removeCurrPost(this.props.content.id)
     }
 
     toggleComment = () => {
@@ -59,7 +66,7 @@ class PostCard extends Component {
               <div className="button-container">
                 <Button color='primary' size="sm" className='post-btn' onClick={this.toggleComment}> Comment </Button>
                 <EditModal btnClass='post-btn' title='Edit Post' name='Edit' content={p}/>
-                <Button color='danger' size="sm" className='post-btn'> Delete </Button>
+                <Button color='danger' size="sm" className='post-btn' onClick={this.handleDelete}> Delete </Button>
               </div>
               {this.state.showComment ?
                 <Comment id={p.id}/> : ('')}
@@ -68,4 +75,5 @@ class PostCard extends Component {
     }
 }
 
-export default PostCard;
+export default connect((state)=>({post:state.post}),
+                {removeCurrPost: saveDeletePost})(PostCard);

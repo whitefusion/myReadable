@@ -9,34 +9,31 @@ import {
 
 import PostCard from './PostCard'
 
-import {
-         Row,
+import { Row,
          Col
        } from 'reactstrap';
 
 class Post extends Component {
-
     componentDidMount(){
         this.props.fetch()
     }
 
     renderCard = (p) => (
-          <Col key={p.id} sm="11" md={{ size: 9}} className='post-col'>
+          <Col key={p.id} sm="11" md={{ size: 10}} className='post-col'>
             <PostCard content={p}/>
           </Col>
     )
 
     render() {
+        const allPosts = this.props.post
+        console.log(Object.values(allPosts))
+        const validPosts = allPosts ? Object.values(allPosts).filter((v) => !v.deleted):([])
         return(
             <Row id='post-main'>
             {
-                this.props.post ?
-                Object.entries(this.props.post).map(([k,v])=>
-                    (
-                        this.renderCard(v)
-                    )
-                )
-                : ('')
+                validPosts.length ?
+                validPosts.map((v)=> this.renderCard(v)) :
+                (<p className="no-posts">No Posts to show.</p>)
             }
             </Row>
         )

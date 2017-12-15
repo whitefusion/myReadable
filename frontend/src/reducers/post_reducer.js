@@ -27,13 +27,9 @@ export default function post (state={},action){
                 }
             }
         case DELETE_POST:
-            return {
-                ...state,
-                [action.id]: {
-                    ...state[action.id],
-                    deleted:true
-                }
-            }
+            const tempPosts = {...state}
+            tempPosts[action.id].deleted = true
+            return tempPosts
         case RECEIVE_POST:
             const reloaded= {}
             action.posts.forEach((p) => reloaded[p.id]=p)

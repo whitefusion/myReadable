@@ -46,3 +46,11 @@ export const savePost = (post) => {
     })
     .then(res=>res.json())
 }
+
+export const removePost = (id)=> {
+    return fetch(`${base}/posts/${id}`,
+    {
+        method: "DELETE",
+        headers
+    })
+}

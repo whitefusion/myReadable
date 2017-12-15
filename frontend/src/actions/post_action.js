@@ -34,12 +34,18 @@ const updatePost = (post) => dispatch => {
     .then(res=>dispatch(editPost(post)))
 }
 
-const deletePost = ({id}) => (
+const deletePost = (id) => (
     {
         type: DELETE_POST,
         id
     }
 )
+
+const saveDeletePost = (id) => dispatch => {
+    api
+    .removePost(id)
+    .then((res) => dispatch(deletePost(id)))
+}
 
 const receivePost = (posts) => (
     {
@@ -54,8 +60,6 @@ const fetchPost = () => dispatch =>(
     .then(posts => dispatch(receivePost(posts)))
 )
 
-
-
 export {
     fetchPost,
     editPost,
@@ -63,6 +67,7 @@ export {
     addPost,
     deletePost,
     receivePost,
+    saveDeletePost,
     createPost,
     ADD_POST,
     EDIT_POST,
