@@ -12,6 +12,22 @@ const defaultData = {
       {
         name: 'Biology',
         path: 'biology'
+      },
+      {
+        name: "Music",
+        path: "music"
+      },
+      {
+        name: "Daily",
+        path: "daily"
+      },
+      {
+        name: "Sports",
+        path: "sports"
+      },
+      {
+        name: "ACG",
+        path: "acg"
       }
   ]
 }

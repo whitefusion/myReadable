@@ -6,10 +6,10 @@ const defaultData = {
   "8xf0y6ziyjabvozdd253nd": {
     id: '8xf0y6ziyjabvozdd253nd',
     timestamp: 1467166872634,
-    title: 'The Odyssey',
-    body: 'The Odyssey (/ˈɒdəsi/;[1] Greek: Ὀδύσσεια Odýsseia, pronounced [o.dýs.sej.ja] in Classical Attic) is one of two major ancient Greek epic poems attributed to Homer. It is, in part, a sequel to the Iliad, the other work ascribed to Homer. The Odyssey is fundamental to the modern Western canon, and is the second-oldest extant work of Western literature; the Iliad is the oldest. Scholars believe the Odyssey was composed near the end of the 8th century BC, somewhere in Ionia, the Greek coastal region of Anatolia.[2]',
-    author: 'Holmer',
-    category: 'Literature',
+    title: 'The awakening',
+    body: 'Self awareness instead of self conciousness',
+    author: 'shan kou yao si',
+    category: 'Daily',
     voteScore: 6,
     deleted: false,
     commentCount: 2
@@ -17,10 +17,10 @@ const defaultData = {
   "6ni6ok3ym7mf1p33lnez": {
     id: '6ni6ok3ym7mf1p33lnez',
     timestamp: 1468479767190,
-    title: 'Darwin and the voyage of the Beagle',
-    body: 'Darwins seminal book, On the Origin of Species, set forth his ideas about evolution and natural selection. These ideas were largely based on direct observations from Darwins travels around the globe. From 1831 to 1836, he was part of a survey expedition carried out by the ship HMS Beagle, which included stops in South America, Australia, and the southern tip of Africa. At each of the expeditions stops, Darwin had the opportunity to study and catalog the local plants and animals.',
+    title: 'a horror film',
+    body: 'A dog ate god\'s hair and run !',
     author: 'Nancy',
-    category: 'Biology',
+    category: 'Daily',
     voteScore: 5,
     deleted: false,
     commentCount: 0
