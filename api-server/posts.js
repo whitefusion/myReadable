@@ -6,9 +6,9 @@ const defaultData = {
   "8xf0y6ziyjabvozdd253nd": {
     id: '8xf0y6ziyjabvozdd253nd',
     timestamp: 1467166872634,
-    title: 'The awakening',
-    body: 'Self awareness instead of self conciousness',
-    author: 'shan kou yao si',
+    title: 'Christmas',
+    body: 'Dr.Prince wears a dress in red and green.',
+    author: 'Ja',
     category: 'Daily',
     voteScore: 6,
     deleted: false,
