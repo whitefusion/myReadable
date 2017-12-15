@@ -1,16 +1,9 @@
 import React, {Component} from 'react';
 import {
-  Collapse,
   Navbar,
-  NavbarToggler,
   NavbarBrand,
   Nav,
-  NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem } from 'reactstrap';
+  Label } from 'reactstrap';
 import CategorySelect from './CategorySelect'
 
 class HeadBar extends Component {
@@ -27,19 +20,8 @@ class HeadBar extends Component {
 
   renderDropDown = () => (
       <div id="headbar">
-        <Navbar color="faded" light expand="md">
+        <Navbar color="faded" light expand="sm">
           <NavbarBrand href="/" id="headbar-title">Readable</NavbarBrand>
-          <NavbarToggler onClick={this.toggle} />
-          <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className="ml-auto" navbar>
-              <UncontrolledDropdown nav>
-                <DropdownToggle nav caret>
-                  Categories
-                </DropdownToggle>
-                <CategorySelect />
-              </UncontrolledDropdown>
-            </Nav>
-          </Collapse>
         </Navbar>
       </div>
   )
