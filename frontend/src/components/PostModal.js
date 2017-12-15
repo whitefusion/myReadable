@@ -1,6 +1,7 @@
 import React,{Component} from 'react'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter ,
         Form, FormGroup, Label,Input, Col} from 'reactstrap';
+import CategorySelect from './CategorySelect'
 
 class PostModal extends Component {
   state = {
@@ -35,11 +36,16 @@ class PostModal extends Component {
                      defaultValue={p ? p.author : ' '} placeholder="post author"/>
             </FormGroup>
             <FormGroup>
+              <Label for="post-category">Category</Label>
+              <CategorySelect showAll={0}/>
+            </FormGroup>
+            <FormGroup>
               <Label for="post-body">Body</Label>
               <Input id="post-body" type="textarea"
                      rows="8" name="text"
                      defaultValue={p ? p.body : ' '} placeholder="post content"/>
             </FormGroup>
+
             </Col>
           </Form>
           <ModalFooter>

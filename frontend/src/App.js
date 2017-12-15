@@ -2,28 +2,25 @@ import React, { Component } from 'react'
 import './App.css'
 import HeadBar from './components/HeadBar'
 import Post from './components/Post'
-import {connect} from 'react-redux'
-import {fetchCate} from './actions'
+import SideBar from './components/SideBar'
 import PostModal from './components/PostModal'
+import {Row, Col} from 'reactstrap'
 
 class App extends Component {
-    componentDidMount(){
-        this.props.fetch()
-    }
-
     render() {
         return (
           <div className="App">
-            <HeadBar
-            catList={this.props.category ?
-                this.props.category.categories
-                : ('')}/>
-            <Post className='post'/>
+            <HeadBar />
+            <Row>
+                <Col md="3"><SideBar /></Col>
+                <Col md="9"><Post className='post'/></Col>
+            </Row>
             <PostModal name="add-new-post"
-            btnBlockCls="new-post-btn-container" btnClass="new-post-btn" title="New Post"/>
+             btnBlockCls="new-post-btn-container"
+             btnClass="new-post-btn" title="New Post"/>
           </div>
         )
     }
 }
 
-export default connect((state)=>({category:state.category}), ({fetch:fetchCate}))(App);
+export default (App);

@@ -21,7 +21,7 @@ class Post extends Component {
     }
 
     renderCard = (p) => (
-          <Col key={p.id} sm="12" md={{ size: 8, offset: 2 }} className='post-col'>
+          <Col key={p.id} sm="12" md={{ size: 9}} className='post-col'>
             <PostCard content={p}/>
           </Col>
     )
