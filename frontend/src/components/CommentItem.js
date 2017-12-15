@@ -36,7 +36,7 @@ class CommentItem extends Component {
                                  rows="3" name="text"
                                  defaultValue={c ? c.body : ' '} placeholder="post content"/>
                         </FormGroup>
-                        </Col>
+                      </Col>
                       </Form>
                       <ModalFooter>
                         <Button color='success' onClick={this.toggle}> Submit </Button>{' '}

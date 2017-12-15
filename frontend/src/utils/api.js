@@ -32,3 +32,17 @@ export const upLoadPost = (post) => {
     .then(res=>res.json())
 }
 
+export const savePost = (post) => {
+    console.log(post)
+    return fetch(`${base}/posts/${post.id}`,
+    {
+        method: "PUT",
+        headers: {
+            'Authorization': 'whatever',
+            'Accept': 'application/json',
+            'Content-type': 'application/json'
+        },
+        body: JSON.stringify({title: post.title, body: post.body})
+    })
+    .then(res=>res.json())
+}

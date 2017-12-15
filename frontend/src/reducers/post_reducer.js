@@ -22,7 +22,8 @@ export default function post (state={},action){
                 ...state,
                 [action.id]: {
                     ...state[action.id],
-                    body:action.body
+                    body:action.body,
+                    title: action.title
                 }
             }
         case DELETE_POST:

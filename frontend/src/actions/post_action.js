@@ -19,13 +19,20 @@ const createPost = (post) => dispatch => {
     .then(res => dispatch(addPost({...post,...res})))
 )}
 
-const editPost = ({id,body}) => (
+const editPost = ({id,title,body}) => (
     {
         type: EDIT_POST,
         id,
+        title,
         body
     }
 )
+
+const updatePost = (post) => dispatch => {
+    api
+    .savePost(post)
+    .then(res=>dispatch(editPost(post)))
+}
 
 const deletePost = ({id}) => (
     {
@@ -52,6 +59,7 @@ const fetchPost = () => dispatch =>(
 export {
     fetchPost,
     editPost,
+    updatePost,
     addPost,
     deletePost,
     receivePost,

@@ -8,8 +8,8 @@ import { Card,
          Badge
        } from 'reactstrap';
 import { getDate } from '../utils/utility.js'
-import PostModal from './PostModal'
 import Comment from './Comment'
+import EditModal from './EditModal'
 
 class PostCard extends Component {
     state = {
@@ -54,11 +54,11 @@ class PostCard extends Component {
                 By {p.author}, {getDate(p.timestamp)}
                 <Badge color="dark" className="post-badge" pill>{p.category}</Badge>
               </CardSubtitle>
-              <CardText><pre>{p.body}</pre></CardText>
+              <pre>{p.body}</pre>
 
               <div className="button-container">
                 <Button color='primary' size="sm" className='post-btn' onClick={this.toggleComment}> Comment </Button>
-                <PostModal btnClass='post-btn' title='Edit Post' name='Edit' content={p}/>
+                <EditModal btnClass='post-btn' title='Edit Post' name='Edit' content={p}/>
                 <Button color='danger' size="sm" className='post-btn'> Delete </Button>
               </div>
               {this.state.showComment ?
