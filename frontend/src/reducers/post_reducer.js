@@ -2,7 +2,8 @@ import {
     ADD_POST,
     EDIT_POST,
     DELETE_POST,
-    RECEIVE_POST
+    RECEIVE_POST,
+    CHANGE_SCORE
 } from '../actions'
 
 import {generateId,generateCommentId} from '../utils/utility'
@@ -11,9 +12,9 @@ import * as api from '../utils/utility'
 
 export default function post (state={},action){
     console.log(action.type)
+    const tempPosts = {...state}
     switch(action.type){
         case ADD_POST:
-            console.log(action.post)
             return {...state,
                     [action.post.id]:action.post
                 }
@@ -27,13 +28,15 @@ export default function post (state={},action){
                 }
             }
         case DELETE_POST:
-            const tempPosts = {...state}
             tempPosts[action.id].deleted = true
             return tempPosts
         case RECEIVE_POST:
             const reloaded= {}
             action.posts.forEach((p) => reloaded[p.id]=p)
             return reloaded
+        case CHANGE_SCORE:
+            tempPosts[action.id].voteScore+=(action.param==="upVote") ? 1 : -1
+            return tempPosts
         default:
             return state
     }

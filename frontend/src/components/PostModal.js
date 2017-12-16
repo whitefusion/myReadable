@@ -68,7 +68,7 @@ class PostModal extends Component {
         <Modal size='lg' id="edit-modal" isOpen={this.state.modal} toggle={this.toggle} >
           <ModalHeader toggle={this.toggle}>{this.props.title}</ModalHeader>
           <Form >
-          <Col sm={9}>
+          <Col sm={9} className="post-form-container">
             <FormGroup>
               <Label for="post-title">Title</Label>
               <Input type='text' name="post-title"

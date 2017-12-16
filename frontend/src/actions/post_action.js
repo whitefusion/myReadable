@@ -4,7 +4,7 @@ const ADD_POST = 'ADD_POST'
 const EDIT_POST = 'EDIT_POST'
 const DELETE_POST = 'DELETE_POST'
 const RECEIVE_POST = 'RECEIVE_POST'
-
+const CHANGE_SCORE = 'CHANGE_SCORE'
 const addPost = (post) => (
     {
         type:ADD_POST,
@@ -60,6 +60,20 @@ const fetchPost = () => dispatch =>(
     .then(posts => dispatch(receivePost(posts)))
 )
 
+const modifyScore = (id,param) => (
+    {
+        type: CHANGE_SCORE,
+        id,
+        param
+    }
+)
+
+const saveScoreChange = (id,param) => dispatch =>(
+    api
+    .changeScore(id,param)
+    .then(res=>dispatch(modifyScore(id,param)))
+)
+
 export {
     fetchPost,
     editPost,
@@ -69,8 +83,10 @@ export {
     receivePost,
     saveDeletePost,
     createPost,
+    saveScoreChange,
     ADD_POST,
     EDIT_POST,
     DELETE_POST,
-    RECEIVE_POST
+    RECEIVE_POST,
+    CHANGE_SCORE
 }

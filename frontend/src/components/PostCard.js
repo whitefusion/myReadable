@@ -10,10 +10,11 @@ import { Card,
 import { getDate } from '../utils/utility.js'
 import Comment from './Comment'
 import EditModal from './EditModal'
-import { saveDeletePost } from '../actions'
+import { saveDeletePost, saveScoreChange } from '../actions'
 import {connect} from 'react-redux'
 
 class PostCard extends Component {
+    p = this.props.content
     state = {
       upVote: false,
       downVote: false,
@@ -29,31 +30,38 @@ class PostCard extends Component {
       this.setState({showComment: !this.state.showComment})
     }
 
-    toggleUpVote = () => {
-      this.setState({upVote: !this.state.upVote})
-    }
-
-    toggleDownVote = () => {
-      this.setState({downVote: !this.state.downVote})
+    toggleVote = (evt) => {
+      const n = evt.target.name
+      if(n === "up-o") {
+        this.setState({upVote:true})
+        this.props.change(this.p.id,'upVote')
+      } else if(n === "down-o") {
+        this.setState({downVote:true})
+        this.props.change(this.p.id,'downVote')
+      } else if(n === "up"){
+        this.setState({upVote: false})
+        this.props.change(this.p.id,'downVote')
+      } else if(n === "down"){
+        this.setState({downVote:false})
+        this.props.change(this.p.id,'upVote')
+      }
     }
 
     render() {
-        const p = this.props.content
+        const p = this.p
         return(
             <Card body className='card'>
-
               <CardTitle className='post-title'>
-
                 <p className='title'>{p.title}</p>
                 <div className='vote'>
                   {this.state.upVote ?
-                    <fa.FaThumbsUp onClick={this.toggleUpVote}/>:
-                    <fa.FaThumbsOUp onClick={this.toggleUpVote}/>
+                    <button name="up" className="v-btn vote-up-btn" onClick={this.toggleVote}></button>:
+                    <button name="up-o" disabled={this.state.downVote} className='v-btn vote-up-o-btn' onClick={this.toggleVote}></button>
                   }
                   <div className='score'>{ ` ${p.voteScore} ` }</div>
                   {this.state.downVote ?
-                    <fa.FaThumbsDown onClick={this.toggleDownVote}/>:
-                    <fa.FaThumbsODown onClick={this.toggleDownVote}/>
+                    <button name="down" className="v-btn vote-down-btn" onClick={this.toggleVote}></button>:
+                    <button name="down-o" disabled={this.state.upVote} className="v-btn vote-down-o-btn" onClick={this.toggleVote}></button>
                   }
                 </div>
               </CardTitle>
@@ -76,4 +84,4 @@ class PostCard extends Component {
 }
 
 export default connect((state)=>({post:state.post}),
-                {removeCurrPost: saveDeletePost})(PostCard);
+                {removeCurrPost: saveDeletePost, change:saveScoreChange})(PostCard);

@@ -26,7 +26,6 @@ class Post extends Component {
 
     render() {
         const allPosts = this.props.post
-        console.log(Object.values(allPosts))
         const validPosts = allPosts ? Object.values(allPosts).filter((v) => !v.deleted):([])
         return(
             <Row id='post-main'>

@@ -90,3 +90,17 @@ export const removeComment = (id) => {
     })
     .then(res=>res.json())
 }
+
+export const changeScore = (id,param) => {
+    console.log({option:param})
+    return fetch(`${base}/posts/${id}`,{
+        method: "POST",
+        headers: {
+            'Authorization': 'whatever',
+            'Accept': 'application/json',
+            'Content-type': 'application/json'
+        },
+        body: JSON.stringify({option:param})
+    })
+    .then(res=>res.json())
+}
