@@ -24,14 +24,37 @@ class Post extends Component {
           </Col>
     )
 
+    sortBySelect = (posts,sort) => {
+        if(!posts.length) return posts
+        switch(sort){
+            case "date-reverse":
+                return posts.sort((a,b) => b.timestamp - a.timestamp)
+            case "date-normal":
+                return posts.sort((a,b) => a.timestamp-b.timestamp)
+            case "score-increase":
+                return posts.sort((a,b) => a.voteScore-b.voteScore)
+            case "score-decrease":
+                return posts.sort((a,b) => b.voteScore - a.voteScore)
+            default:
+                return posts
+        }
+    }
+
     render() {
+        const currCat = this.props.view.currCat
+        const currSort = this.props.view.currSort
         const allPosts = this.props.post
         const validPosts = allPosts ? Object.values(allPosts).filter((v) => !v.deleted):([])
+        let showPosts = validPosts
+        if(currCat !== "All"){
+            showPosts = validPosts.length ? validPosts.filter((p)=>(p.category===this.props.view.currCat)):([])
+        }
+        const sortedPosts = this.sortBySelect(showPosts,currSort)
         return(
             <Row id='post-main'>
             {
-                validPosts.length ?
-                validPosts.map((v)=> this.renderCard(v)) :
+                sortedPosts.length ?
+                sortedPosts.map((v)=> this.renderCard(v)) :
                 (<p className="no-posts">No Posts to show.</p>)
             }
             </Row>
@@ -39,5 +62,5 @@ class Post extends Component {
     }
 }
 
-export default connect((state)=>({post:state.post}),
+export default connect((state)=>({post:state.post,view:state.view}),
                         ({fetch:fetchPost}))(Post);

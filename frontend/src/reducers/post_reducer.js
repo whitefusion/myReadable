@@ -11,7 +11,6 @@ import {generateId,generateCommentId} from '../utils/utility'
 import * as api from '../utils/utility'
 
 export default function post (state={},action){
-    console.log(action.type)
     const tempPosts = {...state}
     switch(action.type){
         case ADD_POST:
