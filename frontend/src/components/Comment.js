@@ -56,7 +56,7 @@ class Comment extends Component {
             <div>
                 <Form id='comment-card-btn-container'>
 
-                    <FormGroup row>
+                    <FormGroup row className='comment-input-container'>
                       <Col sm="10" md={{ size: 10, offset: 1 }}>
                         <Input className='comment-input' type="textarea"
                                 name="comment-body"
@@ -65,7 +65,7 @@ class Comment extends Component {
                                 placeholder="Your comment goes here"/>
                       </Col>
                     </FormGroup>
-                    <FormGroup row>
+                    <FormGroup row className='comment-author-container'>
                       <Col md={{ size: 10, offset: 1 }}>
                         <Row>
                         <Col md="5">

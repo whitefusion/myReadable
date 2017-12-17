@@ -66,12 +66,12 @@ class PostCard extends Component {
                 </div>
               </CardTitle>
               <CardSubtitle>
-                By {p.author}, {getDate(p.timestamp)}
+                <div className="post-author-date">By {p.author}, {getDate(p.timestamp)}</div>
                 <Badge color="dark" className="post-badge" pill>{p.category}</Badge>
               </CardSubtitle>
-              <pre>{p.body}</pre>
+              <pre className="post-body">{p.body}</pre>
 
-              <div className="button-container">
+              <div className="post-btn-container">
                 <Button color='primary' size="sm" className='post-btn' onClick={this.toggleComment}> Comment </Button>
                 <EditModal btnClass='post-btn' title='Edit Post' name='Edit' content={p}/>
                 <Button color='danger' size="sm" className='post-btn' onClick={this.handleDelete}> Delete </Button>

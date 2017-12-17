@@ -5,6 +5,7 @@ import CategorySelect from './CategorySelect'
 import {createPost} from '../actions'
 import {connect} from 'react-redux'
 import {generateId,generateCommentId} from '../utils/utility'
+import {Route, Switch, Link} from 'react-router-dom'
 
 class PostModal extends Component {
   p = this.props.content
@@ -58,14 +59,9 @@ class PostModal extends Component {
     }
   }
 
-  render() {
 
-    return (
-      <div >
-        <div className={this.props.btnBlockCls}>
-        <Button color="primary" size="sm" className={this.props.btnClass} onClick={this.toggle}>{this.props.name}</Button>
-        </div>
-        <Modal size='lg' id="edit-modal" isOpen={this.state.modal} toggle={this.toggle} >
+  renderModal = () => (
+      <Modal size='lg' id="edit-modal" isOpen={this.state.modal} toggle={this.toggle} >
           <ModalHeader toggle={this.toggle}>{this.props.title}</ModalHeader>
           <Form >
           <Col sm={9} className="post-form-container">
@@ -111,6 +107,18 @@ class PostModal extends Component {
             <Button color="secondary" onClick={this.toggle}>Cancel</Button>
           </ModalFooter>
         </Modal>
+  )
+
+renderAddButton = () =>(
+    <div className="new-post-btn-container">
+      <Button color="primary" size="sm" className="new-post-btn" onClick={this.toggle} >"add-new-post"</Button>
+    </div>
+)
+  render() {
+    return (
+      <div >
+        {this.renderAddButton()}
+        {this.renderModal()}
       </div>
     );
   }

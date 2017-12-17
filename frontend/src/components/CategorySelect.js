@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {Input} from 'reactstrap'
 import {fetchCate,changeCat} from '../actions'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 
 class CategorySelect extends Component {
     state = {

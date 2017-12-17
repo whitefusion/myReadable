@@ -3,6 +3,7 @@ import {ListGroupItem, Button,Modal, ModalHeader, ModalBody, ModalFooter ,
         Form, FormGroup, Label,Input, Col} from 'reactstrap'
 import {updateComment,saveRemoveComment} from '../actions'
 import { connect } from 'react-redux'
+import { getDate } from '../utils/utility.js'
 
 class CommentItem extends Component {
     c = this.props.content
@@ -49,9 +50,12 @@ class CommentItem extends Component {
         const c = this.c
         return (
             <ListGroupItem>
-                <div id="comment-body">{c.author} : {c.body}</div>
+                <p id="comment-body">{c.author} : {c.body} </p>
+                <p id="comment-date">- {getDate(c.timestamp)}</p>
+                <div className="comment-btn-container">
                 <Button className='comment-btn' color="danger" onClick={this.handleDelete}>delete</Button>
                 <Button color="primary" className='comment-btn' onClick={this.toggle}>edit</Button>
+                </div>
                   <div >
                     <Modal size='lg' id="edit-modal" isOpen={this.state.modal} toggle={this.toggle} >
                       <ModalHeader toggle={this.toggle}>Edit Comment</ModalHeader>

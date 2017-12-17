@@ -3,6 +3,7 @@ import {Form, FormGroup, Label, Input} from 'reactstrap';
 import CategorySelect from './CategorySelect'
 import {connect} from 'react-redux'
 import {changeSort} from '../actions'
+import {Link} from 'react-router-dom'
 
 class SideBar extends Component {
     state = {

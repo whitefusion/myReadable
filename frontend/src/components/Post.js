@@ -6,6 +6,7 @@ import {
     editPost,
     deletePost
 } from '../actions'
+import {Route} from 'react-router-dom'
 
 import PostCard from './PostCard'
 
@@ -41,7 +42,7 @@ class Post extends Component {
     }
 
     render() {
-        const currCat = this.props.view.currCat
+        let currCat = this.props.view.currCat
         const currSort = this.props.view.currSort
         const allPosts = this.props.post
         const validPosts = allPosts ? Object.values(allPosts).filter((v) => !v.deleted):([])
@@ -50,14 +51,15 @@ class Post extends Component {
             showPosts = validPosts.length ? validPosts.filter((p)=>(p.category===this.props.view.currCat)):([])
         }
         const sortedPosts = this.sortBySelect(showPosts,currSort)
+        currCat = currCat === "All" ? "" : currCat
         return(
-            <Row id='post-main'>
-            {
-                sortedPosts.length ?
-                sortedPosts.map((v)=> this.renderCard(v)) :
-                (<p className="no-posts">No Posts to show.</p>)
-            }
-            </Row>
+                <Row id='post-main'>
+                {
+                    sortedPosts.length ?
+                    sortedPosts.map((v)=> this.renderCard(v)) :
+                    (<p className="no-posts">No Posts to show.</p>)
+                }
+                </Row>
         )
     }
 }
