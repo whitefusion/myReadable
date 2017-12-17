@@ -36,18 +36,21 @@ body,html {
     padding: 2em;
 }
 
-
 /*
- * Post
+ * Post card
  */
-
-#post-main {
+.post-body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    margin-bottom: 5px;
+    margin-top: 5px;
 }
 
-#post-body {
-}
-
-#edit-modal {
+.post-author-date {
+    display: inline;
+    font-size: 13px;
+    font-style: italic;
+    color: gray;
 }
 
 .post-badge {
@@ -56,6 +59,76 @@ body,html {
     width: 80px;
     margin-top: 0;
 }
+
+.post-col {
+    margin-bottom: 20px;
+    margin-left: 10px;
+}
+
+.title,.vote-sign,.vote,.score {
+    display: inline;
+}
+
+.vote {
+    font-size: 0.8em;
+    float: right;
+}
+
+.v-btn {
+    width: 20px;
+    height: 20px;
+    border: 0;
+    background-size: 20px;
+    background-position: center;
+}
+
+.v-btn {
+}
+
+.vote-up-btn {
+    background-image: url('./icons/up.svg');
+}
+
+.vote-up-o-btn {
+    background-image: url('./icons/up-o.svg');
+}
+
+.vote-down-btn {
+    background-image: url('./icons/down.svg');
+}
+
+.vote-down-o-btn {
+    background-image: url('./icons/down-o.svg');
+}
+
+.score {
+    color: #3939cc;
+}
+
+.card {
+    border-radius: 15px;
+}
+
+.card-body {
+    padding: 10px 20px;
+}
+.post-btn-container {
+    display: flex;
+    /*justify-content: space-around;*/
+    border-top: 1px solid #dbdbdd;
+    padding-top: 10px;
+}
+
+.post-btn {
+    width: 80px;
+    padding: 1px;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+/*
+ * Post
+ */
 .new-post-btn-container {
     position: fixed;
     right:30px;
@@ -81,42 +154,10 @@ body,html {
     color: gray;
 }
 
-/*
- * Post Card
- */
-
-.post-col {
-    margin-bottom: 20px;
-    margin-left: 10px;
+.post-form-container {
+    margin:auto;
 }
 
-.title,.vote-sign,.vote,.score {
-    display: inline;
-}
-
-.vote {
-    font-size: 0.8em;
-    float: right;
-}
-
-.score {
-    color: #3939cc;
-}
-
-.card {
-    border-radius: 30px;
-}
-
-.button-container {
-    display: flex;
-    justify-content: space-around;
-    border-top: 1px solid #dbdbdd;
-    padding-top: 10px;
-}
-
-.post-btn {
-    width: 100px;
-}
 
 /*
  * Comment
@@ -132,31 +173,50 @@ body,html {
     margin: auto;
 }
 
+.comment-input-container {
+    margin-bottom: 0;
+}
+
 .comment-submit {
     display: inline-block;
     margin-bottom: 10px;
+    padding: 5px 10px;
 }
 
 .comment-author, .comment-author-label {
     display: inline-block;
 }
-
+.comment-author-container {
+}
 #no-comments {
     color: gray;
     text-align: center;
 }
 
-/* for both comment edit and delete */
+.comment-btn-container {
+    display: inline;
+    margin:0;
+    padding: 2;
+}
 .comment-btn {
-    display: inline-block;
     width: auto;
     float: right ;
     margin-right: 3px;
-    margin-top: -7px;
+    padding: 1px 5px;
+    font-size: 13px;
 }
 
 #comment-body {
-    display: inline-block;
+    display: block;
+    margin: 0;
+    line-height: 1em;
+}
+
+#comment-date {
+    display: inline;
+    font-size: 13px;
+    font-style: italic;
+    color: gray;
 }
 
 
