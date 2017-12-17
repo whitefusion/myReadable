@@ -6,11 +6,14 @@ import {createPost} from '../actions'
 import {connect} from 'react-redux'
 import {generateId,generateCommentId} from '../utils/utility'
 import {Route, Switch, Link} from 'react-router-dom'
+import { Alert } from 'reactstrap';
 
 class PostModal extends Component {
   p = this.props.content
   state = {
       modal: false,
+      alert: false,
+      message:"",
       currTitle: this.p ? this.p.title : '',
       currAuthor: this.p ? this.p.author : '',
       currCategory: this.p ? this.p.category : '',
@@ -23,20 +26,38 @@ class PostModal extends Component {
     });
   }
 
+  showAlert = () => {
+    const base = " cannot be empty !"
+    let msg=""
+    if(this.state.currTitle==="")
+      msg="Title" + base
+    else if(this.state.currAuthor==="")
+      msg="Author"+base
+    else if(this.state.currBody==="")
+      msg="Body"+base
+    this.setState({alert:true,message:msg})
+    setTimeout(()=>{this.setState({alert:false,message:""})},5000)
+  }
+
   handleSubmit = (evt) => {
     evt.preventDefault();
-    this.toggle()
-    const id = generateId()
-    const currPost = {
-      author: this.state.currAuthor,
-      body: this.state.currBody,
-      category: this.state.currCategory,
-      title: this.state.currTitle,
-      id,
-      timestamp:Date.now()
+    if(this.state.currAuthor &&
+      this.state.currBody &&
+      this.state.currTitle){
+      this.toggle()
+      const id = generateId()
+      const currPost = {
+        author: this.state.currAuthor,
+        body: this.state.currBody,
+        category: this.state.currCategory,
+        title: this.state.currTitle,
+        id,
+        timestamp:Date.now()
+      }
+      this.props.create(currPost)
+    } else {
+      this.showAlert()
     }
-    this.props.create(currPost)
-
   }
 
   handleChange = (evt) => {
@@ -102,6 +123,7 @@ class PostModal extends Component {
 
             </Col>
           </Form>
+          <Alert color="danger" isOpen={this.state.alert}>{this.state.message}</Alert>
           <ModalFooter>
             <Button color='success' onClick={ this.handleSubmit}> Submit </Button>{' '}
             <Button color="secondary" onClick={this.toggle}>Cancel</Button>

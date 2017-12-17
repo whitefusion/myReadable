@@ -1,5 +1,5 @@
 import React,{Component} from 'react'
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter ,
+import { Alert,Button, Modal, ModalHeader, ModalBody, ModalFooter ,
         Form, FormGroup, Label,Input, Col} from 'reactstrap';
 import CategorySelect from './CategorySelect'
 import {updatePost} from '../actions'
@@ -9,6 +9,8 @@ class EditModal extends Component {
   p = this.props.content
   state = {
       modal: false,
+      alert: false,
+      message: "",
       currTitle: this.p ? this.p.title : '',
       currBody: this.p ? this.p.body : ''
   }
@@ -18,16 +20,31 @@ class EditModal extends Component {
       modal: !this.state.modal
     });
   }
+  showAlert = () => {
+    const base = " cannot be empty !"
+    let msg=""
+    if(this.state.currTitle==="")
+      msg="Title" + base
+    else if(this.state.currBody==="")
+      msg="Body"+base
+    this.setState({alert:true,message:msg})
+    setTimeout(()=>{this.setState({alert:false,message:""})},5000)
+  }
 
   handleSubmit = (evt) => {
     evt.preventDefault();
-    const updatedPost = {
-      body: this.state.currBody,
-      title: this.state.currTitle,
-      id:this.p.id,
+    if(this.state.currBody && this.state.currTitle){
+      const updatedPost = {
+        body: this.state.currBody,
+        title: this.state.currTitle,
+        id:this.p.id,
+      }
+      this.props.edit(updatedPost)
+      this.toggle()
+    } else {
+      this.showAlert();
     }
-    this.props.edit(updatedPost)
-    this.toggle()
+
   }
 
   handleChange = (evt) => {
@@ -79,6 +96,7 @@ class EditModal extends Component {
 
             </Col>
           </Form>
+          <Alert color="danger" isOpen={this.state.alert}>{this.state.message}</Alert>
           <ModalFooter>
             <Button color='success' onClick={ this.handleSubmit}> Submit </Button>{' '}
             <Button color="secondary" onClick={this.toggle}>Cancel</Button>

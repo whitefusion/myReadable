@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {ListGroupItem, Button,Modal, ModalHeader, ModalBody, ModalFooter ,
+import {Alert, ListGroupItem, Button,Modal, ModalHeader, ModalBody, ModalFooter ,
         Form, FormGroup, Label,Input, Col} from 'reactstrap'
 import {updateComment,saveRemoveComment} from '../actions'
 import { connect } from 'react-redux'
@@ -10,6 +10,8 @@ class CommentItem extends Component {
 
     state = {
       modal: false,
+      alert: false,
+      message:"",
       currComment: this.c ? this.c.body:'',
     }
 
@@ -31,14 +33,29 @@ class CommentItem extends Component {
         }
     }
 
+    showAlert = () => {
+        const base = " cannot be empty !"
+        let msg=""
+        if(this.state.currComment===""){
+          msg="Comment body" + base
+          this.setState({alert:true,message:msg})
+          setTimeout(()=>{this.setState({alert:false,message:""})},5000)
+        }
+    }
+
     handleClick = (evt) => {
       evt.preventDefault()
-      this.props.edit({
-        id:this.c.id,
-        body:this.state.currComment,
-        parentId:this.c.parentId
-      })
-      this.toggle()
+      if(this.state.currComment){
+        this.props.edit({
+          id:this.c.id,
+          body:this.state.currComment,
+          parentId:this.c.parentId
+        })
+        this.toggle()
+      } else {
+        this.showAlert();
+      }
+
     }
 
     handleDelete = (evt) => {
@@ -49,8 +66,11 @@ class CommentItem extends Component {
     render () {
         const c = this.c
         return (
-            <ListGroupItem>
-                <p id="comment-body">{c.author} : {c.body} </p>
+            <ListGroupItem className="comment-item-container">
+                <div className="comment-main">
+                  <p id="comment-author">{c.author} : </p>
+                  <p id="comment-body"> {c.body} </p>
+                </div>
                 <p id="comment-date">- {getDate(c.timestamp)}</p>
                 <div className="comment-btn-container">
                 <Button className='comment-btn' color="danger" onClick={this.handleDelete}>delete</Button>
@@ -70,6 +90,7 @@ class CommentItem extends Component {
                         </FormGroup>
                       </Col>
                       </Form>
+                      <Alert color="danger" isOpen={this.state.alert}>{this.state.message}</Alert>
                       <ModalFooter>
                         <Button color='success' onClick={this.handleClick}> Submit </Button>{' '}
                         <Button color="secondary" onClick={this.toggle}>Cancel</Button>

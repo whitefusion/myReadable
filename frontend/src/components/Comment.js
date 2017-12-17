@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { Col, Row, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import {Alert, Col, Row, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import { connect } from 'react-redux'
 import {fetchComment, createComment} from '../actions/'
 import CommentItem from './CommentItem'
@@ -8,6 +8,8 @@ import {generateCommentId} from '../utils/utility'
 class Comment extends Component {
 
     state = {
+        message: "",
+        alert: false,
         currCommnet: '',
         currAuthor: ''
     }
@@ -31,17 +33,33 @@ class Comment extends Component {
         }
     }
 
+    showAlert = () => {
+        const base = " cannot be empty !"
+        let msg=""
+        if(this.state.currAuthor==="")
+          msg="Author" + base
+        else if(this.state.currComment==="")
+          msg="Comment body"+base
+        this.setState({alert:true,message:msg})
+        setTimeout(()=>{this.setState({alert:false,message:""})},5000)
+    }
+
     handleSubmit = (evt) => {
         evt.preventDefault();
-        const tempId = generateCommentId()
-        this.props.add({
-            id:tempId,
-            parentId: this.props.id,
-            timestamp: Date.now(),
-            author: this.state.currAuthor,
-            body: this.state.currComment
-        })
-        this.clearState()
+        if(this.state.currAuthor && this.state.currComment){
+            const tempId = generateCommentId()
+            this.props.add({
+                id:tempId,
+                parentId: this.props.id,
+                timestamp: Date.now(),
+                author: this.state.currAuthor,
+                body: this.state.currComment
+            })
+            this.clearState()
+        } else {
+            this.showAlert();
+        }
+
     }
 
     clearState = () => {
@@ -54,12 +72,14 @@ class Comment extends Component {
         const validComments = allComments ? allComments.filter((c) => !c.deleted):[]
         return(
             <div>
-                <Form id='comment-card-btn-container'>
 
+                <Form id='comment-card-btn-container'>
+                    <Alert className="alert" color="danger" isOpen={this.state.alert}>{this.state.message}</Alert>
                     <FormGroup row className='comment-input-container'>
                       <Col sm="10" md={{ size: 10, offset: 1 }}>
                         <Input className='comment-input' type="textarea"
                                 name="comment-body"
+                                bsSize="sm"
                                 value={this.state.currComment}
                                 onChange={this.handleChange}
                                 placeholder="Your comment goes here"/>
@@ -71,6 +91,7 @@ class Comment extends Component {
                         <Col md="5">
                         <Input className='comment-author'
                                 name="comment-author"
+                                bsSize="sm"
                                 value={this.state.currAuthor}
                                 onChange={this.handleChange}
                                 placeholder='Author'/>
