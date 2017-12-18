@@ -13,7 +13,6 @@ import PostCard from './PostCard'
 import { Row,
          Col
        } from 'reactstrap';
-
 class Post extends Component {
     componentDidMount(){
         this.props.fetch()
@@ -53,13 +52,13 @@ class Post extends Component {
         const sortedPosts = this.sortBySelect(showPosts,currSort)
         currCat = currCat === "All" ? "" : currCat
         return(
-                <Row id='post-main'>
-                {
-                    sortedPosts.length ?
-                    sortedPosts.map((v)=> this.renderCard(v)) :
-                    (<p className="no-posts">No Posts to show.</p>)
-                }
-                </Row>
+            <Row id='post-main'>
+            {
+                sortedPosts.length ?
+                sortedPosts.map((v)=> this.renderCard(v)) :
+                (<p className="no-posts">No Posts to show.</p>)
+            }
+            </Row>
         )
     }
 }

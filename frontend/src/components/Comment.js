@@ -36,10 +36,10 @@ class Comment extends Component {
     showAlert = () => {
         const base = " cannot be empty !"
         let msg=""
-        if(this.state.currAuthor==="")
-          msg="Author" + base
-        else if(this.state.currComment==="")
-          msg="Comment body"+base
+        if(this.state.currComment==="")
+          msg="Comment body" + base
+        else if(this.state.currAuthor==="")
+          msg="Author"+base
         this.setState({alert:true,message:msg})
         setTimeout(()=>{this.setState({alert:false,message:""})},5000)
     }

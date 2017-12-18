@@ -22,6 +22,7 @@ class CategorySelect extends Component {
 
     render(){
         const catList = this.props.category.categories
+        const currCat= this.state.currCat
         return (
             <Input className="category-select"
             type="select" name="select"
