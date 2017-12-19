@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-
 import {
     fetchPost,
     editPost,
@@ -9,12 +8,12 @@ import {
 import {Route} from 'react-router-dom'
 
 import PostCard from './PostCard'
-
+import PostDetail from './PostDetail'
 import { Row,
          Col
        } from 'reactstrap';
 
-class Post extends Component {
+class PostList extends Component {
     componentDidMount(){
         this.props.fetch()
     }
@@ -42,7 +41,6 @@ class Post extends Component {
     }
 
     render() {
-        console.log(this.props.category)
         let currCat = this.props.category? this.props.category : "All"
         const currSort = this.props.view.currSort
         const allPosts = this.props.post
@@ -53,16 +51,18 @@ class Post extends Component {
         }
         const sortedPosts = this.sortBySelect(showPosts,currSort)
         return(
-            <Row id='post-main'>
-            {
-                sortedPosts.length ?
-                sortedPosts.map((v)=> this.renderCard(v)) :
-                (<p className="no-posts">No Posts to show.</p>)
-            }
-            </Row>
+            <div>
+                <Row id='post-main'>
+                {
+                    sortedPosts.length ?
+                    sortedPosts.map((v)=> this.renderCard(v)) :
+                    (<p className="no-posts">No Posts to show.</p>)
+                }
+                </Row>
+            </div>
         )
     }
 }
 
 export default connect((state)=>({post:state.post,view:state.view}),
-                        ({fetch:fetchPost}))(Post);
+                        ({fetch:fetchPost}))(PostList);
