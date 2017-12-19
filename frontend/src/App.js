@@ -1,17 +1,19 @@
 import React, { Component } from 'react'
 import './App.css'
 import {HeadBar} from './components/HeadBar'
-import Post from './components/Post'
+import PostList from './components/PostList'
 import SideBar from './components/SideBar'
+import PostDetail from './components/PostDetail'
 import PostModal from './components/PostModal'
 import {Row, Col, Button} from 'reactstrap'
-import {fetchCate} from './actions'
+import {fetchCate,fetchPost} from './actions'
 import {connect} from 'react-redux'
-import {Route, BrowserRouter as Router} from 'react-router-dom'
+import {Route, BrowserRouter as Router,Switch} from 'react-router-dom'
 
 class App extends Component {
     componentDidMount(){
-        this.props.fetch()
+        this.props.fetchCate()
+        this.props.fetchPost()
     }
 
     render() {
@@ -23,17 +25,35 @@ class App extends Component {
                   <Row>
                       <Col md="3" sm="auto"><SideBar /></Col>
                       <Col md="9" >
-                      <Route path="/:category?" render={({match})=>(
-                        <Post className='post' category={match.params.category}/>
+                      <Switch>
+                      <Route path="/:category?" exact render={({match})=>(
+                        <div>
+                          <PostList className='post' category={match.params.category}/>
+                          <PostModal title="New Post" catList={this.props.category.categories}/>
+                        </div>
                       )} />
+                      <Route path="/:categories?/:id?" render={({match})=>{
+                        if(this.props.post[match.params.id])
+                          return(
+                            <Row>
+                            <Col md="10" >
+                            <PostDetail className="post-detail" content={this.props.post[match.params.id]}/>
+                            </Col>
+                            </Row>
+                            )
+                        else
+                          return ("")
+                      }
+                      }/>
+                      </Switch>
                       </Col>
                   </Row>
                 </div>
               </Router>
-                <PostModal title="New Post" catList={this.props.category.categories}/>
+
           </div>
         )
     }
 }
 
-export default connect((state)=>({category:state.category}), ({fetch:fetchCate}))(App);
+export default connect((state)=>({category:state.category,post:state.post}), ({fetchCate,fetchPost}))(App);

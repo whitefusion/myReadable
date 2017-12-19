@@ -9,14 +9,15 @@ import {fetchCate,changeCat} from '../actions'
 
 class SideBar extends Component {
     state = {
-      currSort: "date: lastest",
+      currSortName: "date: lastest",
+      currSortValue: "date-normal" ,
       openCate: false,
       openSort: false,
       currCate: "All"
     }
 
-    sortName = [{text:"date: latest", value: "date-normal"},
-                {text:"date: oldest", value: "date-reverse"},
+    sortName = [{text:"date: latest", value: "date-reverse"},
+                {text:"date: oldest", value: "date-normal"},
                 {text:"vote score: high", value: "score-decrease"},
                 {text:"vote score: low", value: "score-increase"}]
 
@@ -41,14 +42,11 @@ class SideBar extends Component {
       this.setState({currCate: evt.target.name})
     }
 
-    setSortName = (evt) => {
-      this.setState({currSort: evt.target.name})
-    }
-
     clickHandler = (evt) => {
       evt.preventDefault()
+      this.setState({currSortName: evt.target.name})
       const v = evt.target.value
-      this.setState({currSort:v})
+      this.setState({currSortValue:v})
       this.props.sortBy(v)
     }
 
@@ -75,7 +73,7 @@ class SideBar extends Component {
                   <ButtonDropdown isOpen={this.state.openCate}
                    toggle={this.toggleCate}
                    className="dropdown-container">
-                    <DropdownToggle caret className="dropdown-caret" outline color="primary">
+                    <DropdownToggle caret className="dropdown-caret" outline color="dark">
                       {this.state.currCate}
                     </DropdownToggle>
                     <DropdownMenu>
@@ -100,14 +98,14 @@ class SideBar extends Component {
                    toggle={this.toggleSort}
                    className="dropdown-container"
                    >
-                    <DropdownToggle caret className="dropdown-caret" outline color="primary">
-                      {this.state.currSort}
+                    <DropdownToggle caret className="dropdown-caret" outline color="dark">
+                      {this.state.currSortName}
                     </DropdownToggle>
                     <DropdownMenu>
                     {this.sortName.map((item,index) => (
                       <DropdownItem
                        key={index}
-                       onClick={this.setSortName}
+                       onClick={this.clickHandler}
                        name={item.text}
                        value = {item.value}
                        className="dropdown-item"
