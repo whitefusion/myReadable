@@ -66,14 +66,13 @@ body,html {
 }
 
 .post-badge {
+    font-size: 12px;
     margin-left: 5px;
-    line-height: 1em;
-    width: 80px;
-    margin-top: 0;
+    vertical-align: middle;
 }
 
 .post-col {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     margin-left: 10px;
 }
 
@@ -84,17 +83,19 @@ body,html {
 .vote {
     font-size: 0.8em;
     float: right;
+    font-family: Trebuchet MS, Verdana, sans-serif;
 }
 
 .v-btn {
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
     border: 0;
-    background-size: 20px;
+    background-size: 15px;
     background-position: center;
 }
 
-.v-btn {
+.v-btn:focus{
+    outline: none;
 }
 
 .vote-up-btn {
@@ -114,15 +115,17 @@ body,html {
 }
 
 .score {
-    color: #3939cc;
+    color: black;
+    font-size: 15px;
 }
 
 .card {
-    border-radius: 15px;
+    border-radius: 0px;
+    box-shadow:3px 3px 7px 0px rgba(117,117,117,1);
 }
 
 .card-body {
-    padding: 10px 20px;
+    padding: 7px 15px;
 }
 .post-btn-container {
     display: flex;
@@ -136,6 +139,11 @@ body,html {
     padding: 1px;
     margin-right: 5px;
     margin-left: 5px;
+}
+
+.post-title {
+    font-size: 20px;
+    margin-bottom: 8px;
 }
 
 /*
@@ -169,7 +177,6 @@ body,html {
 .post-form-container {
     margin:auto;
 }
-
 
 /*
  * Comment
@@ -241,6 +248,13 @@ body,html {
     font-size: 13px;
     font-style: italic;
     color: gray;
+}
+
+.comment-number {
+    display: inline-block;
+    float: right;
+    font-size: 12px;
+    font-family: Trebuchet MS, Verdana, sans-serif;
 }
 
 .comment-item-container {
