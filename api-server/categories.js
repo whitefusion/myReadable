@@ -7,27 +7,27 @@ const defaultData = {
   categories: [
       {
         name: 'Literature',
-        path: 'literature'
+        path: 'Literature'
       },
       {
         name: 'Biology',
-        path: 'biology'
+        path: 'Biology'
       },
       {
         name: "Music",
-        path: "music"
+        path: "Music"
       },
       {
         name: "Daily",
-        path: "daily"
+        path: "Daily"
       },
       {
         name: "Sports",
-        path: "sports"
+        path: "Sports"
       },
       {
         name: "ACG",
-        path: "acg"
+        path: "ACG"
       }
   ]
 }
