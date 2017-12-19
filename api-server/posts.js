@@ -24,7 +24,84 @@ const defaultData = {
     voteScore: 5,
     deleted: false,
     commentCount: 0
-  }
+  },
+    "8xf0y6zijabvozdd253nd": {
+    id: '8xf0y6zijabvozdd253nd',
+    timestamp: 1463366872634,
+    title: '掉了',
+    body: '曾经唱过的歌，分享过的笑声，在心中不断拉扯',
+    author: '吴青峰',
+    category: 'Music',
+    voteScore: 60,
+    deleted: false,
+    commentCount: 0
+  },
+    "8xf0yziyjabvozdd253nd": {
+    id: '8xf0yziyjabvozdd253nd',
+    timestamp: 1469966872634,
+    title: 'Cavaliers win',
+    body: 'Cleveland Cavaliers beats golden state warriors with 112-110, Kyrie irving hits the clutch !',
+    author: 'Jed',
+    category: 'Sports',
+    voteScore: 16,
+    deleted: false,
+    commentCount: 0
+  },
+    "8xf06ziyjabvozdd253nd": {
+    id: '8xf06ziyjabvozdd253nd',
+    timestamp: 1464566872634,
+    title: 'Cruel Panda',
+    body: 'Panda is dangerous, you can consider it as the combination of black bear and white bear',
+    author: 'Bass',
+    category: 'Biology',
+    voteScore: 0,
+    deleted: false,
+    commentCount: 0
+  },
+    "8xfy6ziyjabvozdd253nd": {
+    id: '8xfy6ziyjabvozdd253nd',
+    timestamp: 1466066872634,
+    title: 'I am writing a post ... ',
+    body: 'I am making up posts for each category. I really don\'t know what to say',
+    author: 'shin',
+    category: 'Daily',
+    voteScore: 11,
+    deleted: false,
+    commentCount: 0
+  },
+    "8x0y6ziyjabvozdd253nd": {
+    id: '8x0y6ziyjabvozdd253nd',
+    timestamp: 1462866872634,
+    title: 'Brain',
+    body: 'Someone outperforms you without efforts',
+    author: 'unknown',
+    category: 'Daily',
+    voteScore: -3,
+    deleted: false,
+    commentCount: 0
+  },
+    "8f0y6ziyjabvozdd253nd": {
+    id: '8f0y6ziyjabvozdd253nd',
+    timestamp: 1469466872634,
+    title: 'Holmes',
+    body: 'Yes, someone I mean guys like Holmes',
+    author: 'WatsonBBB',
+    category: 'Literature',
+    voteScore: 22,
+    deleted: false,
+    commentCount: 0
+  },
+    "xf0y6ziyjabvozdd253nd": {
+    id: 'xf0y6ziyjabvozdd253nd',
+    timestamp: 1567166872634,
+    title: 'chicken winner',
+    body: 'Lexburner is one of my favorite bilibili up',
+    author: 'white',
+    category: 'ACG',
+    voteScore: 6,
+    deleted: false,
+    commentCount: 0
+  },
 }
 
 function getData (token) {
