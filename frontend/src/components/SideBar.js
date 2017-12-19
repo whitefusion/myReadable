@@ -38,12 +38,10 @@ class SideBar extends Component {
     }
 
     setCateName = (evt) => {
-      evt.preventDefault()
       this.setState({currCate: evt.target.name})
     }
 
     setSortName = (evt) => {
-      evt.preventDefault()
       this.setState({currSort: evt.target.name})
     }
 
@@ -55,7 +53,7 @@ class SideBar extends Component {
     }
 
     renderDropDownItem = (item,index) => (
-      <Link to={`\${item.path}`} key={index+1}
+      <Link to={`/${item.path}`} key={index+1}
        className="dropdown-link">
         <DropdownItem
          className="dropdown-item"

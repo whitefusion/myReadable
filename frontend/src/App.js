@@ -7,6 +7,7 @@ import PostModal from './components/PostModal'
 import {Row, Col, Button} from 'reactstrap'
 import {fetchCate} from './actions'
 import {connect} from 'react-redux'
+import {Route, BrowserRouter as Router} from 'react-router-dom'
 
 class App extends Component {
     componentDidMount(){
@@ -17,12 +18,18 @@ class App extends Component {
         return (
           <div className="App">
             <HeadBar />
+              <Router>
                 <div>
                   <Row>
                       <Col md="3" sm="auto"><SideBar /></Col>
-                      <Col md="9" ><Post className='post'/></Col>
+                      <Col md="9" >
+                      <Route path="/:category?" render={({match})=>(
+                        <Post className='post' category={match.params.category}/>
+                      )} />
+                      </Col>
                   </Row>
                 </div>
+              </Router>
                 <PostModal title="New Post" catList={this.props.category.categories}/>
           </div>
         )

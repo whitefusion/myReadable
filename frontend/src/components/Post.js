@@ -42,16 +42,16 @@ class Post extends Component {
     }
 
     render() {
-        let currCat = this.props.view.currCat
+        console.log(this.props.category)
+        let currCat = this.props.category? this.props.category : "All"
         const currSort = this.props.view.currSort
         const allPosts = this.props.post
         const validPosts = allPosts ? Object.values(allPosts).filter((v) => !v.deleted):([])
         let showPosts = validPosts
         if(currCat !== "All"){
-            showPosts = validPosts.length ? validPosts.filter((p)=>(p.category===this.props.view.currCat)):([])
+            showPosts = validPosts.length ? validPosts.filter((p)=>(p.category===currCat)):([])
         }
         const sortedPosts = this.sortBySelect(showPosts,currSort)
-        currCat = currCat === "All" ? "" : currCat
         return(
             <Row id='post-main'>
             {
