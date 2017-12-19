@@ -13,6 +13,7 @@ import PostCard from './PostCard'
 import { Row,
          Col
        } from 'reactstrap';
+
 class Post extends Component {
     componentDidMount(){
         this.props.fetch()

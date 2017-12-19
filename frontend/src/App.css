@@ -36,6 +36,18 @@ body,html {
     padding: 2em;
 }
 
+.dropdown-container {
+    display: block;
+}
+
+.dropdwon-item {
+}
+
+.dropdown-link:hover{
+    text-decoration: none;
+}
+
+
 /*
  * Post card
  */

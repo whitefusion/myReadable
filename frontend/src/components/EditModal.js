@@ -72,7 +72,7 @@ class EditModal extends Component {
     return (
       <div >
         <div className={this.props.btnBlockCls}>
-        <Button color="primary" size="sm" className={this.props.btnClass} onClick={this.toggle}>{this.props.name}</Button>
+        <Button outline color="dark" size="sm" className={this.props.btnClass} onClick={this.toggle}>{this.props.name}</Button>
         </div>
         <Modal size='lg' id="edit-modal" isOpen={this.state.modal} toggle={this.toggle} >
           <ModalHeader toggle={this.toggle}>{this.props.title}</ModalHeader>
