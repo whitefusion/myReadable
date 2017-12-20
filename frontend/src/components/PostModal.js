@@ -35,6 +35,8 @@ class PostModal extends Component {
       msg="Author"+base
     else if(this.state.currBody==="")
       msg="Body"+base
+    else if(this.state.currCategory==="")
+      msg="Category"+base
     this.setState({alert:true,message:msg})
     setTimeout(()=>{this.setState({alert:false,message:""})},5000)
   }
@@ -43,7 +45,8 @@ class PostModal extends Component {
     evt.preventDefault();
     if(this.state.currAuthor &&
       this.state.currBody &&
-      this.state.currTitle){
+      this.state.currTitle &&
+      this.state.currCategory){
       this.toggle()
       const id = generateId()
       const currPost = {
