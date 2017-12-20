@@ -4,23 +4,14 @@ It is based and React and Redux. </br>
 The local server is forked from [Readable Start Server](https://github.com/udacity/reactnd-project-readable-starter).
 
 ## Functionality
-- Browse all posts or by category
-- Create/Edit/Delete a post
-- Sort posts by date or votescore
-- Upvote or downvote a post
-- Create/Edit/Delete a comment
+- Browse all posts by category in different sortings
+- Create/Edit/Delete/Vote a post
+- Create/Edit/Delete/Vote a comment
 
 ## Folder Struture
 ```
 - api-server
-   catgories.js
-   comments.js
-   config.js
-   package-lock.json
-   package.json
-   posts.js
-   README.md
-   server.js
+  [unchanged]
 - frontend
     package-lock.json
     package.json
@@ -46,8 +37,9 @@ The local server is forked from [Readable Start Server](https://github.com/udaci
           CommentItem.js
           EditModal.js
           HeadBar.js
-          Post.js
           PostCard.js
+          PostDetail.js
+          PostList.js
           PostModal.js
           SideBar.js
        -icons
@@ -71,3 +63,6 @@ The local server is forked from [Readable Start Server](https://github.com/udaci
 First run `npm install` both **api-server/** and **frontend/** folder.  </br>
 To start Server, run `node server` under **api-server/**.
 In **frontend/**, run `npm start`, and you will be directed to http://localhost:3000 in your browser to see the website.
+
+## Note
+- Voting mechanism: Since the server does not provide api for saving voting status, you can vote for a post or a comment infinite times as long as you refresh the webpage. 
