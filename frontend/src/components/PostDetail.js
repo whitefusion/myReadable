@@ -6,25 +6,21 @@ import { Card,
          CardText,
          Badge
        } from 'reactstrap';
-import { getDate } from '../utils/utility.js'
+import {partial, getDate } from '../utils/utility.js'
 import Comment from './Comment'
 import EditModal from './EditModal'
-import { saveDeletePost, saveScoreChange } from '../actions'
+import { saveDeletePost, saveScoreChange, setVote} from '../actions'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 
 class PostDetail extends Component {
-    p = this.props.post[this.props.id]
     state = {
-      upVote: false,
-      downVote: false,
-      showComment: false,
       deleted:false
     }
 
     handleDelete = (evt) => {
       evt.preventDefault();
-      this.props.removeCurrPost(this.props.content.id)
+      this.props.removeCurrPost(this.props.id)
       this.setState({deleted:true})
     }
 
@@ -34,38 +30,49 @@ class PostDetail extends Component {
 
     toggleVote = (evt) => {
       const n = evt.target.name
-      if(n === "up-o") {
-        this.setState({upVote:true})
-        this.props.change(this.p.id,'upVote')
-      } else if(n === "down-o") {
-        this.setState({downVote:true})
-        this.props.change(this.p.id,'downVote')
-      } else if(n === "up"){
-        this.setState({upVote: false})
-        this.props.change(this.p.id,'downVote')
-      } else if(n === "down"){
-        this.setState({downVote:false})
-        this.props.change(this.p.id,'upVote')
+      const changeVote = partial(this.props.setVote,this.props.id)
+      const sendVote = partial(this.props.change,this.props.id)
+      switch(n){
+        case "up-o":
+          changeVote("upVote")
+          sendVote("upVote")
+          return
+        case "up":
+          changeVote("upVote")
+          sendVote("downVote")
+          return
+        case "down-o":
+          changeVote("downVote")
+          sendVote("downVote")
+          return
+        case "down":
+          changeVote("downVote")
+          sendVote("upVote")
+          return
       }
+
     }
     render() {
-        const p = this.p
+        let p = this.props.post ? this.props.post[this.props.id] : ""
         if(!this.state.deleted && p){
         return(
         <Card body className='card'>
           <CardTitle className='post-detail-title'>
             <p className='title'>{p.title}</p>
+            {
+            this.props.vote ? (
             <div className='vote'>
-              {this.state.upVote ?
+              {this.props.vote.upVote ?
                 <button name="up" className="v-btn vote-up-btn" onClick={this.toggleVote}></button>:
-                <button name="up-o" disabled={this.state.downVote} className='v-btn vote-up-o-btn' onClick={this.toggleVote}></button>
+                <button name="up-o" disabled={this.props.vote.downVote} className='v-btn vote-up-o-btn' onClick={this.toggleVote}></button>
               }
               <div className='score'>{ ` ${p.voteScore} ` }</div>
-              {this.state.downVote ?
+              {this.props.vote.downVote ?
                 <button name="down" className="v-btn vote-down-btn" onClick={this.toggleVote}></button>:
-                <button name="down-o" disabled={this.state.upVote} className="v-btn vote-down-o-btn" onClick={this.toggleVote}></button>
+                <button name="down-o" disabled={this.props.vote.upVote} className="v-btn vote-down-o-btn" onClick={this.toggleVote}></button>
               }
-            </div>
+            </div>) : ("")
+          }
           </CardTitle>
           <CardSubtitle>
             <div className="post-author-date">By <strong>{p.author}</strong>, {getDate(p.timestamp)}</div>
@@ -89,5 +96,7 @@ class PostDetail extends Component {
     }
 }
 
-export default connect((state)=>({post:state.post}),
-                {removeCurrPost: saveDeletePost, change:saveScoreChange})(PostDetail);
+// const getCurrVote = (voteMap, id) => (voteMap.currVote[id])
+
+export default connect((state,ownProps)=>({post:state.post,vote:state.view.currVote[ownProps.id]}),
+                {removeCurrPost: saveDeletePost, change:saveScoreChange, setVote})(PostDetail);

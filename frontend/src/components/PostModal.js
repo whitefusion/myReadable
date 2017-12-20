@@ -9,21 +9,21 @@ import {Route, Switch, Link} from 'react-router-dom'
 import { Alert } from 'reactstrap';
 
 class PostModal extends Component {
-  p = this.props.content
   state = {
       modal: false,
       alert: false,
       message:"",
-      currTitle: this.p ? this.p.title : '',
-      currAuthor: this.p ? this.p.author : '',
-      currCategory: this.p ? this.p.category : '',
-      currBody: this.p ? this.p.body : ''
+      currTitle: '',
+      currAuthor: '',
+      currCategory: '',
+      currBody: ''
   }
 
   toggle = () => {
     this.setState({
       modal: !this.state.modal
     });
+    // this.clearLastPost();
   }
 
   showAlert = () => {
@@ -36,7 +36,7 @@ class PostModal extends Component {
     else if(this.state.currBody==="")
       msg="Body"+base
     else if(this.state.currCategory==="")
-      msg="Category"+base
+      msg="Category cannot be none !"
     this.setState({alert:true,message:msg})
     setTimeout(()=>{this.setState({alert:false,message:""})},5000)
   }
@@ -58,9 +58,19 @@ class PostModal extends Component {
         timestamp:Date.now()
       }
       this.props.create(currPost)
+      this.clearLastPost()
     } else {
       this.showAlert()
     }
+  }
+
+  clearLastPost = () => {
+    this.setState({
+      currTitle:"",
+      currCategory:"",
+      currAuthor:"",
+      currBody:""
+    })
   }
 
   handleChange = (evt) => {
@@ -110,6 +120,10 @@ class PostModal extends Component {
                 id="selectCategory"
                 value={this.state.currCategory}
                 onChange={this.handleChange}>
+                {this.state.currCategory?
+                  ("")
+                  : (<option value='' key={0}>None</option>)
+                }
                 {this.props.catList ?
                  this.props.catList.map((c,index) => (<option value={c.name} key={index+1}>{c.name}</option>))
                 : ('')}
@@ -123,7 +137,6 @@ class PostModal extends Component {
                      placeholder="post content"
                      onChange={this.handleChange}/>
             </FormGroup>
-
             </Col>
           </Form>
           <Alert color="danger" isOpen={this.state.alert}>{this.state.message}</Alert>
@@ -149,4 +162,4 @@ renderAddButton = () =>(
   }
 }
 
-export default connect((state)=>({post:state.post}),{create: createPost})(PostModal);
+export default connect((state)=>({}),{create: createPost})(PostModal);
