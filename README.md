@@ -5,7 +5,7 @@ The local server is forked from [Readable Start Server](https://github.com/udaci
 
 ## Functionality
 - Browse all posts by category in different orders
-- Create/Edit/Delete/Vote a post
+- Create/Edit/Delete/Vote/Comment a post
 - Create/Edit/Delete/Vote a comment
 
 ## Folder Struture
