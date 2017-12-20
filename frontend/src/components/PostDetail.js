@@ -50,7 +50,6 @@ class PostDetail extends Component {
           sendVote("upVote")
           return
       }
-
     }
     render() {
         let p = this.props.post ? this.props.post[this.props.id] : ""

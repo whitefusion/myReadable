@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
 import {Alert, ListGroupItem, Button,Modal, ModalHeader, ModalBody, ModalFooter ,
         Form, FormGroup, Label,Input, Col} from 'reactstrap'
-import {updateComment,saveRemoveComment} from '../actions'
+import {updateComment,saveRemoveComment, saveCommentScoreChange} from '../actions'
 import { connect } from 'react-redux'
-import { getDate } from '../utils/utility.js'
+import { getDate, partial } from '../utils/utility.js'
 
 class CommentItem extends Component {
     c = this.props.content
@@ -13,6 +13,8 @@ class CommentItem extends Component {
       alert: false,
       message:"",
       currComment: this.c ? this.c.body:'',
+      upVote:false,
+      downVote: false
     }
 
     toggle = () => {
@@ -63,6 +65,29 @@ class CommentItem extends Component {
       this.props.remove(this.c.id,this.c.parentId)
     }
 
+    toggleVote = (evt) => {
+      const n = evt.target.name
+      const sendVote = partial(this.props.change,this.c.id,this.c.parentId)
+      switch(n){
+        case "up-o":
+          this.setState({upVote: true})
+          sendVote("upVote")
+          return
+        case "up":
+          this.setState({upVote:false})
+          sendVote("downVote")
+          return
+        case "down-o":
+          this.setState({downVote:true})
+          sendVote("downVote")
+          return
+        case "down":
+          this.setState({downVote:false})
+          sendVote("upVote")
+          return
+      }
+    }
+
     render () {
         const c = this.c
         return (
@@ -72,10 +97,22 @@ class CommentItem extends Component {
                   <p id="comment-body"> {c.body} </p>
                 </div>
                 <p id="comment-date">- {getDate(c.timestamp)}</p>
+                <div className='vote-comment'>
+                  {this.state.upVote ?
+                    <button name="up" className="v-btn vote-up-btn" onClick={this.toggleVote}></button>:
+                    <button name="up-o" disabled={this.state.downVote} className='v-btn vote-up-o-btn' onClick={this.toggleVote}></button>
+                  }
+                  <div className='score'>{ ` ${c.voteScore} ` }</div>
+                  {this.state.downVote ?
+                    <button name="down" className="v-btn vote-down-btn" onClick={this.toggleVote}></button>:
+                    <button name="down-o" disabled={this.state.upVote} className="v-btn vote-down-o-btn" onClick={this.toggleVote}></button>
+                  }
+                </div>
                 <div className="comment-btn-container">
                 <Button className='comment-btn' color="danger" onClick={this.handleDelete}>delete</Button>
                 <Button color="primary" className='comment-btn' onClick={this.toggle}>edit</Button>
                 </div>
+
                   <div >
                     <Modal size='lg' id="edit-modal" isOpen={this.state.modal} toggle={this.toggle} >
                       <ModalHeader toggle={this.toggle}>Edit Comment</ModalHeader>
@@ -103,4 +140,4 @@ class CommentItem extends Component {
 }
 
 export default connect((state)=>({comment:state.comment}),
-                                 ({edit: updateComment, remove: saveRemoveComment }))(CommentItem);
+                                 ({edit: updateComment, remove: saveRemoveComment, change: saveCommentScoreChange }))(CommentItem);

@@ -72,7 +72,6 @@ class Comment extends Component {
         const validComments = allComments ? allComments.filter((c) => !c.deleted):[]
         return(
             <div>
-
                 <Form id='comment-card-btn-container'>
                     <Alert className="alert" color="danger" isOpen={this.state.alert}>{this.state.message}</Alert>
                     <FormGroup row className='comment-input-container'>
