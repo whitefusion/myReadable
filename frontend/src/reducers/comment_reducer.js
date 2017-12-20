@@ -14,7 +14,7 @@ export default function comment (state={},action){
             const pId = action.comment.parentId
             return {
                 ...state,
-                [pId]: state[pId].concat(action.comment)
+                [pId]: state[pId]?state[pId].concat(action.comment):[action.comment]
             }
         case EDIT_COMMENT:
             tempComments[action.parentId].forEach((c,index) => {
