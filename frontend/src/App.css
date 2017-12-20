@@ -121,7 +121,7 @@ body,html {
 
 .card {
     border-radius: 0px;
-    box-shadow:3px 3px 7px 0px rgba(117,117,117,1);
+    box-shadow:3px 3px 7px 0px rgba(188,188,188,1);
 }
 
 .card-body {
@@ -130,8 +130,9 @@ body,html {
 .post-btn-container {
     display: flex;
     /*justify-content: space-around;*/
-    border-top: 1px solid #dbdbdd;
-    padding-top: 10px;
+    border-bottom: 1px solid #dbdbdd;
+    padding-bottom: 10px;
+    padding-top: 20px;
 }
 
 .post-btn {
@@ -146,6 +147,9 @@ body,html {
     margin-bottom: 8px;
 }
 
+.post-detail-title {
+    font-size: 28px;
+}
 /*
  * Post
  */
@@ -205,7 +209,7 @@ body,html {
 .comment-author, .comment-author-label {
     display: inline-block;
 }
-.comment-author-container {
+.comment-author-container,.comment-input-container {
 }
 #no-comments {
     color: gray;

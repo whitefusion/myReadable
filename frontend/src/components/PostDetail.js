@@ -14,16 +14,18 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 
 class PostDetail extends Component {
-    p = this.props.content
+    p = this.props.post[this.props.id]
     state = {
       upVote: false,
       downVote: false,
-      showComment: false
+      showComment: false,
+      deleted:false
     }
 
     handleDelete = (evt) => {
       evt.preventDefault();
       this.props.removeCurrPost(this.props.content.id)
+      this.setState({deleted:true})
     }
 
     toggleComment = () => {
@@ -48,13 +50,11 @@ class PostDetail extends Component {
     }
     render() {
         const p = this.p
-        if(p){
+        if(!this.state.deleted && p){
         return(
         <Card body className='card'>
-          <CardTitle className='post-title'>
-            <Link to={`/${p.category}/${p.id}`}>
+          <CardTitle className='post-detail-title'>
             <p className='title'>{p.title}</p>
-            </Link>
             <div className='vote'>
               {this.state.upVote ?
                 <button name="up" className="v-btn vote-up-btn" onClick={this.toggleVote}></button>:
@@ -68,8 +68,9 @@ class PostDetail extends Component {
             </div>
           </CardTitle>
           <CardSubtitle>
-            <div className="post-author-date">By {p.author}, {getDate(p.timestamp)}</div>
+            <div className="post-author-date">By <strong>{p.author}</strong>, {getDate(p.timestamp)}</div>
             <Badge color="info" className="post-badge">{p.category}</Badge>
+            <div className="comment-number"> {p.commentCount} {p.commentCount > 1 ? "comments" : "comment"} </div>
           </CardSubtitle>
           <pre className="post-body">{p.body}</pre>
 
@@ -80,10 +81,13 @@ class PostDetail extends Component {
           <Comment id={p.id}/>
         </Card>)
     } else {
-        return ("")
+        return (<div>
+                    <p>The post does not exist.</p>
+                    <Link to="/"> Back to post list </Link>
+                </div>)
     }
     }
 }
 
-export default connect((state)=>({}),
+export default connect((state)=>({post:state.post}),
                 {removeCurrPost: saveDeletePost, change:saveScoreChange})(PostDetail);

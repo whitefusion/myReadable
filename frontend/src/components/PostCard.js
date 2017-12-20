@@ -15,8 +15,29 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 
 class PostCard extends Component {
-    p = this.props.content
+    p = this.props.post[this.props.id]
 
+    state = {
+      upVote: false,
+      downVote: false,
+    }
+
+    toggleVote = (evt) => {
+      const n = evt.target.name
+      if(n === "up-o") {
+        this.setState({upVote:true})
+        this.props.change(this.p.id,'upVote')
+      } else if(n === "down-o") {
+        this.setState({downVote:true})
+        this.props.change(this.p.id,'downVote')
+      } else if(n === "up"){
+        this.setState({upVote: false})
+        this.props.change(this.p.id,'downVote')
+      } else if(n === "down"){
+        this.setState({downVote:false})
+        this.props.change(this.p.id,'upVote')
+      }
+    }
     render() {
         const p = this.p
         return(
@@ -27,7 +48,15 @@ class PostCard extends Component {
                 </Link>
                 <Badge color="info" className="post-badge">{p.category}</Badge>
                 <div className='vote'>
-                  <div className='score'>{ `votes: ${p.voteScore} ` }</div>
+                  {this.state.upVote ?
+                    <button name="up" className="v-btn vote-up-btn" onClick={this.toggleVote}></button>:
+                    <button name="up-o" disabled={this.state.downVote} className='v-btn vote-up-o-btn' onClick={this.toggleVote}></button>
+                  }
+                  <div className='score'>{ ` ${p.voteScore} ` }</div>
+                  {this.state.downVote ?
+                    <button name="down" className="v-btn vote-down-btn" onClick={this.toggleVote}></button>:
+                    <button name="down-o" disabled={this.state.upVote} className="v-btn vote-down-o-btn" onClick={this.toggleVote}></button>
+                  }
                 </div>
               </CardTitle>
               <CardSubtitle>

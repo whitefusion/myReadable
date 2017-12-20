@@ -8,7 +8,7 @@ import PostModal from './components/PostModal'
 import {Row, Col, Button} from 'reactstrap'
 import {fetchCate,fetchPost} from './actions'
 import {connect} from 'react-redux'
-import {Route, BrowserRouter as Router,Switch} from 'react-router-dom'
+import {Route, BrowserRouter as Router,Switch, Link} from 'react-router-dom'
 
 class App extends Component {
     componentDidMount(){
@@ -33,16 +33,13 @@ class App extends Component {
                         </div>
                       )} />
                       <Route path="/:categories?/:id?" render={({match})=>{
-                        if(this.props.post[match.params.id])
                           return(
                             <Row>
-                            <Col md="10" >
-                            <PostDetail className="post-detail" content={this.props.post[match.params.id]}/>
-                            </Col>
+                              <Col md="10" >
+                                <PostDetail className="post-detail" id={match.params.id}/>
+                              </Col>
                             </Row>
-                            )
-                        else
-                          return ("")
+                          )
                       }
                       }/>
                       </Switch>
@@ -50,10 +47,9 @@ class App extends Component {
                   </Row>
                 </div>
               </Router>
-
           </div>
         )
     }
 }
 
-export default connect((state)=>({category:state.category,post:state.post}), ({fetchCate,fetchPost}))(App);
+export default connect((state)=>({category:state.category}), ({fetchCate,fetchPost}))(App);

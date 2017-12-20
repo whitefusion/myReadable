@@ -9,7 +9,7 @@ import {fetchCate,changeCat} from '../actions'
 
 class SideBar extends Component {
     state = {
-      currSortName: "date: lastest",
+      currSortName: "date: latest",
       currSortValue: "date-normal" ,
       openCate: false,
       openSort: false,

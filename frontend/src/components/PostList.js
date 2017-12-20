@@ -14,13 +14,10 @@ import { Row,
        } from 'reactstrap';
 
 class PostList extends Component {
-    componentDidMount(){
-        this.props.fetch()
-    }
 
     renderCard = (p) => (
           <Col key={p.id} sm="11" md={{ size: 10}} className='post-col'>
-            <PostCard content={p}/>
+            <PostCard id={p.id}/>
           </Col>
     )
 
