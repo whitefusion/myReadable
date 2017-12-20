@@ -6,14 +6,19 @@ import SideBar from './components/SideBar'
 import PostDetail from './components/PostDetail'
 import PostModal from './components/PostModal'
 import {Row, Col, Button} from 'reactstrap'
-import {fetchCate,fetchPost} from './actions'
+import {fetchCate,fetchPost,initVote} from './actions'
 import {connect} from 'react-redux'
 import {Route, BrowserRouter as Router,Switch, Link} from 'react-router-dom'
 
 class App extends Component {
+
     componentDidMount(){
         this.props.fetchCate()
         this.props.fetchPost()
+        .then((res)=>{
+          const idList = res.posts.map(p=>p.id)
+          return (this.props.initVote(idList))
+        })
     }
 
     render() {
@@ -52,4 +57,4 @@ class App extends Component {
     }
 }
 
-export default connect((state)=>({category:state.category}), ({fetchCate,fetchPost}))(App);
+export default connect((state)=>({category:state.category,view:state.view}), ({fetchCate,fetchPost,initVote}))(App);
