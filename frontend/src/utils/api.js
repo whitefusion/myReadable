@@ -18,7 +18,6 @@ export const getCommentById = (id) =>
     .then(res=>res.json())
 
 export const upLoadPost = (post) => {
-    console.log(post)
     return fetch(`${base}/posts`,
     {
         method: "POST",
@@ -92,8 +91,20 @@ export const removeComment = (id) => {
 }
 
 export const changeScore = (id,param) => {
-    console.log({option:param})
     return fetch(`${base}/posts/${id}`,{
+        method: "POST",
+        headers: {
+            'Authorization': 'whatever',
+            'Accept': 'application/json',
+            'Content-type': 'application/json'
+        },
+        body: JSON.stringify({option:param})
+    })
+    .then(res=>res.json())
+}
+
+export const changeCommentScore = (id,param) => {
+    return fetch(`${base}/comments/${id}`,{
         method: "POST",
         headers: {
             'Authorization': 'whatever',
