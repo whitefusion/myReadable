@@ -265,4 +265,10 @@ body,html {
     padding: 8px;
 }
 
+.vote-comment {
+    font-size: 0.8em;
+    margin-left: 20px;
+    display: inline-block;
+    font-family: Trebuchet MS, Verdana, sans-serif;
+}
 
