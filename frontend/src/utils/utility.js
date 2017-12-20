@@ -4,3 +4,4 @@ export const getDate =(ts) => {
     const t = new Date(ts)
     return t.toDateString()
 }
+export const partial = (fn, ...args) => fn.bind(null,...args)
