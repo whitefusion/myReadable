@@ -1,24 +1,25 @@
 import * as api from '../utils/api'
-const ADD_COMMENT = 'ADD_COMMENT'
-const EDIT_COMMENT = 'EDIT_COMMENT'
-const DELETE_COMMENT = 'DELETE_COMMENT'
-const DELETE_PARENT = 'DELETE_PARENT'
-const RECEIVE_COMMENT = 'RECEIVE_COMMENT'
+export const ADD_COMMENT = 'ADD_COMMENT'
+export const EDIT_COMMENT = 'EDIT_COMMENT'
+export const DELETE_COMMENT = 'DELETE_COMMENT'
+export const DELETE_PARENT = 'DELETE_PARENT'
+export const RECEIVE_COMMENT = 'RECEIVE_COMMENT'
+export const CHANGE_COMMENT_SCORE = 'CHANGE_COMMENT_SCORE'
 
-const addComment = (comment) => (
+export const addComment = (comment) => (
     {
         type: ADD_COMMENT,
         comment
     }
 )
 
-const createComment = (c) => dispatch => {
+export const createComment = (c) => dispatch => {
     api
     .upLoadComment(c)
-    .then(res => dispatch(addComment(c)))
+    .then(res => dispatch(addComment(res)))
 }
 
-const editComment = ({id,body,parentId}) => (
+export const editComment = ({id,body,parentId}) => (
     {
         type: EDIT_COMMENT,
         id,
@@ -27,7 +28,7 @@ const editComment = ({id,body,parentId}) => (
     }
 )
 
-const updateComment = (comment) => dispatch => (
+export const updateComment = (comment) => dispatch => (
     api
     .saveComment(comment)
     .then(res => dispatch(editComment({id:comment.id,
@@ -35,7 +36,7 @@ const updateComment = (comment) => dispatch => (
                                         parentId:comment.parentId})))
 )
 
-const deleteComment = (id,parentId) => (
+export const deleteComment = (id,parentId) => (
     {
         type: DELETE_COMMENT,
         id,
@@ -43,36 +44,36 @@ const deleteComment = (id,parentId) => (
     }
 )
 
-const saveRemoveComment = (id,parentId) => dispatch => {
+export const saveRemoveComment = (id,parentId) => dispatch => {
     api
     .removeComment(id)
     .then(res => dispatch(deleteComment(id,parentId)))
 }
 
-const receiveComment = (comments) => (
+export const receiveComment = (comments) => (
     {
         type: RECEIVE_COMMENT,
         comments
     }
 )
 
-const fetchComment = (id) => (dispatch) => {
+export const fetchComment = (id) => (dispatch) => {
     api
     .getCommentById(id)
     .then((comments) => dispatch(receiveComment(comments)))
 }
 
-export {
-    addComment,
-    editComment,
-    deleteComment,
-    fetchComment,
-    createComment,
-    updateComment,
-    saveRemoveComment,
-    ADD_COMMENT,
-    EDIT_COMMENT,
-    DELETE_PARENT,
-    DELETE_COMMENT,
-    RECEIVE_COMMENT
-}
+export const modifyCommentScore = (id,parentId,param) => (
+    {
+        type: CHANGE_COMMENT_SCORE,
+        id,
+        parentId,
+        param
+    }
+)
+
+export const saveCommentScoreChange = (id,parentId,param) => dispatch =>(
+    api
+    .changeCommentScore(id,param)
+    .then(res=>dispatch(modifyCommentScore(id,parentId,param)))
+)
