@@ -40,6 +40,11 @@ class PostCard extends Component {
 
     }
 
+    handleDelete = (evt) => {
+      evt.preventDefault();
+      this.props.removeCurrPost(this.props.id)
+    }
+
     render() {
         const p = this.props.post[this.props.id]
         return(
@@ -67,7 +72,13 @@ class PostCard extends Component {
               <CardSubtitle>
                 <div className="post-author-date">By <strong>{p.author}</strong>, {getDate(p.timestamp)}</div>
                 <div className="comment-number"> {p.commentCount} {p.commentCount > 1 ? "comments" : "comment"} </div>
+                <div className="post-list-btn-container">
+                  <EditModal btnClass='post-list-edit' title='Edit Post' name='Edit' content={p}/>
+                  <Button color='danger' outline size="sm" className='post-list-delete' onClick={this.handleDelete}> Delete </Button>
+                </div>
+
               </CardSubtitle>
+
             </Card>
         )
     }
