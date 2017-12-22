@@ -1,4 +1,3 @@
-import React from 'react'
 import {
     CHANGE_CATE,
     CHANGE_SORT,

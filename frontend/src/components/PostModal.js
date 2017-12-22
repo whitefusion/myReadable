@@ -1,11 +1,9 @@
 import React,{Component} from 'react'
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter ,
+import { Button, Modal, ModalHeader, ModalFooter ,
         Form, FormGroup, Label,Input, Col} from 'reactstrap';
-import CategorySelect from './CategorySelect'
 import {createPost} from '../actions'
 import {connect} from 'react-redux'
-import {generateId,generateCommentId} from '../utils/utility'
-import {Route, Switch, Link} from 'react-router-dom'
+import {generateId} from '../utils/utility'
 import { Alert } from 'reactstrap';
 
 class PostModal extends Component {

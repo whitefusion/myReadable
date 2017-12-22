@@ -1,14 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import {
-    fetchPost,
-    editPost,
-    deletePost
-} from '../actions'
-import {Route} from 'react-router-dom'
-
+import {fetchPost} from '../actions'
 import PostCard from './PostCard'
-import PostDetail from './PostDetail'
+
 import { Row,
          Col
        } from 'reactstrap';

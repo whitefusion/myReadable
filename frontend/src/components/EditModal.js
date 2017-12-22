@@ -1,7 +1,6 @@
 import React,{Component} from 'react'
-import { Alert,Button, Modal, ModalHeader, ModalBody, ModalFooter ,
+import { Alert,Button, Modal, ModalHeader, ModalFooter ,
         Form, FormGroup, Label,Input, Col} from 'reactstrap';
-import CategorySelect from './CategorySelect'
 import {updatePost} from '../actions'
 import {connect} from 'react-redux'
 

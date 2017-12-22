@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Alert, Col, Row, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import {Alert, Col, Row, Button, Form, FormGroup, Input } from 'reactstrap';
 import { connect } from 'react-redux'
 import {fetchComment, createComment} from '../actions/'
 import CommentItem from './CommentItem'

@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Alert, ListGroupItem, Button,Modal, ModalHeader, ModalBody, ModalFooter ,
+import {Alert, ListGroupItem, Button,Modal, ModalHeader, ModalFooter ,
         Form, FormGroup, Label,Input, Col} from 'reactstrap'
 import {updateComment,saveRemoveComment, saveCommentScoreChange} from '../actions'
 import { connect } from 'react-redux'
@@ -84,6 +84,8 @@ class CommentItem extends Component {
         case "down":
           this.setState({downVote:false})
           sendVote("upVote")
+          return
+        default:
           return
       }
     }

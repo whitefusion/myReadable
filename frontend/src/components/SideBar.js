@@ -1,11 +1,10 @@
 import React, {Component} from 'react'
-import {Form, FormGroup, Label, Input,
+import {Form, FormGroup, Label,
         ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem} from 'reactstrap';
-import CategorySelect from './CategorySelect'
 import {connect} from 'react-redux'
 import {changeSort} from '../actions'
 import {Link} from 'react-router-dom'
-import {fetchCate,changeCat} from '../actions'
+import {fetchCate} from '../actions'
 
 class SideBar extends Component {
     state = {

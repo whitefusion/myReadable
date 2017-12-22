@@ -6,8 +6,6 @@ import {
     CHANGE_COMMENT_SCORE
 } from '../actions'
 
-import {generateId,generateCommentId} from '../utils/utility'
-
 export default function comment (state={},action){
     let tempComments = {...state}, targetId = -1;
     switch(action.type){

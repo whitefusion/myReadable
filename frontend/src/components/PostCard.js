@@ -1,18 +1,15 @@
 import React, { Component } from 'react'
-import * as fa from 'react-icons/lib/fa/'
 import { Card,
          Button,
          CardTitle,
          CardSubtitle,
-         CardText,
          Badge
        } from 'reactstrap';
 import { getDate, partial } from '../utils/utility.js'
-import Comment from './Comment'
 import EditModal from './EditModal'
 import { saveDeletePost, saveScoreChange, setVote } from '../actions'
 import {connect} from 'react-redux'
-import {Link,Route} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 class PostCard extends Component {
     toggleVote = (evt) => {
@@ -35,6 +32,8 @@ class PostCard extends Component {
         case "down":
           changeVote("downVote")
           sendVote("upVote")
+          return
+        default:
           return
       }
 

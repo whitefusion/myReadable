@@ -3,7 +3,6 @@ import { Card,
          Button,
          CardTitle,
          CardSubtitle,
-         CardText,
          Badge
        } from 'reactstrap';
 import {partial, getDate } from '../utils/utility.js'
@@ -44,6 +43,8 @@ class PostDetail extends Component {
         case "down":
           changeVote("downVote")
           sendVote("upVote")
+          return
+        default:
           return
       }
     }

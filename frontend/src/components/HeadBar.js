@@ -1,9 +1,8 @@
 import React from 'react';
 import {
   Navbar,
-  NavbarBrand,
-  Nav,
-  Label } from 'reactstrap';
+  NavbarBrand
+} from 'reactstrap';
 
 export const HeadBar = () => {
   return (
