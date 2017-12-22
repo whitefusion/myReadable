@@ -47,6 +47,14 @@ class PostCard extends Component {
 
     render() {
         const p = this.props.post[this.props.id]
+        let count = 0
+        if(p && this.props.comment[p.id]){
+          if(this.props.comment[p.id]) {
+            this.props.comment[p.id].forEach((c)=>{
+              if(!c.deleted) count+=1
+            })
+          }
+        }
         return(
             <Card body className='card'>
               <CardTitle className='post-title'>
@@ -71,7 +79,7 @@ class PostCard extends Component {
               </CardTitle>
               <CardSubtitle>
                 <div className="post-author-date">By <strong>{p.author}</strong>, {getDate(p.timestamp)}</div>
-                <div className="comment-number"> {p.commentCount} {p.commentCount > 1 ? "comments" : "comment"} </div>
+                <div className="comment-number"> {count} {count > 1 ? "comments" : "comment"} </div>
                 <div className="post-list-btn-container">
                   <EditModal btnClass='post-list-edit' title='Edit Post' name='Edit' content={p}/>
                   <Button color='danger' outline size="sm" className='post-list-delete' onClick={this.handleDelete}> Delete </Button>
@@ -84,5 +92,5 @@ class PostCard extends Component {
     }
 }
 
-export default connect((state,ownProps)=>({post:state.post,vote:state.view.currVote[ownProps.id]}),
+export default connect((state,ownProps)=>({post:state.post,vote:state.view.currVote[ownProps.id],comment:state.comment}),
                 {removeCurrPost: saveDeletePost, change:saveScoreChange, setVote})(PostCard);

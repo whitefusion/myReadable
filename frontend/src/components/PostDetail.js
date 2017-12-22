@@ -24,10 +24,6 @@ class PostDetail extends Component {
       this.setState({deleted:true})
     }
 
-    toggleComment = () => {
-      this.setState({showComment: !this.state.showComment})
-    }
-
     toggleVote = (evt) => {
       const n = evt.target.name
       const changeVote = partial(this.props.setVote,this.props.id)
@@ -54,6 +50,12 @@ class PostDetail extends Component {
     render() {
         let p = this.props.post ? this.props.post[this.props.id] : ""
         if(!this.state.deleted && p){
+          let count = 0
+          if(this.props.comment[p.id]) {
+            this.props.comment[p.id].forEach((c)=>{
+              if(!c.deleted) count+=1
+            })
+          }
         return(
         <Card body className='card'>
           <CardTitle className='post-detail-title'>
@@ -76,7 +78,7 @@ class PostDetail extends Component {
           <CardSubtitle>
             <div className="post-author-date">By <strong>{p.author}</strong>, {getDate(p.timestamp)}</div>
             <Badge color="info" className="post-badge">{p.category}</Badge>
-            <div className="comment-number"> {p.commentCount} {p.commentCount > 1 ? "comments" : "comment"} </div>
+            <div className="comment-number"> {count} {count > 1 ? "comments" : "comment"} </div>
           </CardSubtitle>
           <pre className="post-body">{p.body}</pre>
 
@@ -97,5 +99,5 @@ class PostDetail extends Component {
 
 // const getCurrVote = (voteMap, id) => (voteMap.currVote[id])
 
-export default connect((state,ownProps)=>({post:state.post,vote:state.view.currVote[ownProps.id]}),
+export default connect((state,ownProps)=>({post:state.post,vote:state.view.currVote[ownProps.id],comment:state.comment}),
                 {removeCurrPost: saveDeletePost, change:saveScoreChange, setVote})(PostDetail);
