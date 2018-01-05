@@ -3,6 +3,9 @@ Readble is a prototype of online post management website. </br>
 It is based and React and Redux. </br>
 The local server is forked from [Readable Start Server](https://github.com/udacity/reactnd-project-readable-starter).
 
+![](preview/Main.png)
+![](preview/Post.png)
+
 ## Functionality
 - Browse all posts by category in different orders
 - Create/Edit/Delete/Vote/Comment a post
