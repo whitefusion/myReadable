@@ -1,0 +1,28 @@
+{
+  "categories": [
+      {
+        "name": "Literature",
+        "path": "Literature"
+      },
+      {
+        "name": "Biology",
+        "path": "Biology"
+      },
+      {
+        "name": "Music",
+        "path": "Music"
+      },
+      {
+        "name": "Daily",
+        "path": "Daily"
+      },
+      {
+        "name": "Sports",
+        "path": "Sports"
+      },
+      {
+        "name": "ACG",
+        "path": "ACG"
+      }
+  ]
+}
