@@ -58,7 +58,6 @@ exports.createPost = async (ctx) => {
 }
 
 exports.updatePost = async (ctx) => {
-  console.log(ctx.request.body)
   const targetId = ctx.params.id
   const targetPost = await Post.findOne({id: targetId})
   const updated = ctx.request.body

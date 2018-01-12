@@ -16,7 +16,10 @@ export const addComment = (comment) => (
 export const createComment = (c) => dispatch => {
     api
     .upLoadComment(c)
-    .then(res => dispatch(addComment(res)))
+    .then(res => {
+        console.log(res)
+        dispatch(addComment(res))
+    })
 }
 
 export const editComment = ({id,body,parentId}) => (

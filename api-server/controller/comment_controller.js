@@ -42,7 +42,7 @@ exports.getCommentsById =async (ctx) => {
 
 exports.createComment = async (ctx) => {
   const newComment = ctx.request.body
-  newComment._id = new Mongoose.Types.ObjectId
+  newComment._id = new mongoose.Types.ObjectId
   newComment.voteScore = 0
   newComment.deleted = false
   newComment.parentDeleted = false
@@ -58,7 +58,7 @@ exports.createComment = async (ctx) => {
   if(!result) {
     throw new Error("Fail to create comment")
   } else {
-    ctx.body = {message:"comment created" , data:createRes}
+    ctx.body = createRes
   }
 }
 
@@ -68,7 +68,7 @@ exports.updateComment = async (ctx) => {
   const targetComment = await Comment.findOne({id:targetId})
   targetComment["body"] = body
 
-  const result = await Comment.findByIdAndUpdate({id:targetId},targetComment)
+  const result = await Comment.findOneAndUpdate({id:targetId},targetComment)
 
   if(!result) {
     throw new Error(`Fail to update comment ${targetId}`)
