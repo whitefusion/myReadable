@@ -4,7 +4,8 @@ import { Button, Modal, ModalHeader, ModalFooter ,
 import {createPost} from '../actions'
 import {connect} from 'react-redux'
 import {generateId} from '../utils/utility'
-import { Alert } from 'reactstrap';
+import { Alert } from 'reactstrap'
+import {addVote} from '../actions'
 
 class PostModal extends Component {
   state = {
@@ -56,6 +57,7 @@ class PostModal extends Component {
         timestamp:Date.now()
       }
       this.props.create(currPost)
+      this.props.addVote(id)
       this.clearLastPost()
     } else {
       this.showAlert()
@@ -160,4 +162,4 @@ renderAddButton = () =>(
   }
 }
 
-export default connect((state)=>({}),{create: createPost})(PostModal);
+export default connect((state)=>({view:state.view}),{create: createPost,addVote})(PostModal);
