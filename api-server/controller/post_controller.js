@@ -34,11 +34,11 @@ exports.getByCategory = async (ctx) => {
 
 exports.getById = async (ctx) => {
   const targetId = ctx.params.id
-  const result = Post.findOne({id:targetId})
+  const result = await Post.findOne({id:targetId})
   if(!result) {
     throw new Error(`Post ${targetId} cannot be found !`)
   } else {
-    ctx.body = {message: 'Post found !', data: result}
+    ctx.body = result
   }
 }
 
@@ -58,11 +58,12 @@ exports.createPost = async (ctx) => {
 }
 
 exports.updatePost = async (ctx) => {
+  console.log(ctx.request.body)
   const targetId = ctx.params.id
   const targetPost = await Post.findOne({id: targetId})
   const updated = ctx.request.body
-  targetPost[title] = updated[title]
-  targetPost[body] = updated[body]
+  targetPost["title"] = updated["title"]
+  targetPost["body"] = updated["body"]
   const result = await Post.findOneAndUpdate({id:targetId}, targetPost)
 
   if(!result) {
@@ -86,14 +87,14 @@ exports.deletePost = async (ctx) => {
 exports.changeVote = async (ctx) => {
   const option = ctx.request.body.option
   const targetId = ctx.params.id
-  const targetPost = Post.findOne({id:targetId})
+  let targetPost = await Post.findOne({id:targetId})
   if(option === "upVote"){
     targetPost.voteScore+=1
   } else {
     targetPost.voteScore-=1
   }
 
-  const result = Post.findOneAndUpdate({id:targetId}, targetPost)
+  const result =await Post.findOneAndUpdate({id:targetId}, targetPost)
 
   if(!result) {
     throw new Error("Fail to change score")

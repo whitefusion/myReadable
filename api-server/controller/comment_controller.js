@@ -36,7 +36,7 @@ exports.getCommentsById =async (ctx) => {
   if(!result) {
     throw new Error(`Comment ${id} cannot be found !`)
   } else {
-    ctx.body = {message:"comment found !",data:result}
+    ctx.body = result
   }
 }
 
@@ -60,22 +60,20 @@ exports.createComment = async (ctx) => {
   } else {
     ctx.body = {message:"comment created" , data:createRes}
   }
-
-  
 }
 
 exports.updateComment = async (ctx) => {
   const {body} = ctx.request.body
   const targetId = ctx.params.id
   const targetComment = await Comment.findOne({id:targetId})
-  targetComment[body] = body
+  targetComment["body"] = body
 
   const result = await Comment.findByIdAndUpdate({id:targetId},targetComment)
 
   if(!result) {
     throw new Error(`Fail to update comment ${targetId}`)
   } else {
-    ctx.body = {message:'comment update!' , data:result}
+    ctx.body = result
   }
 }
 
@@ -102,14 +100,14 @@ exports.deleteComment =async (ctx) => {
 exports.changeVote = async (ctx) => {
   const option = ctx.request.body.option
   const targetId = ctx.params.id
-  const targetComment = Comment.findOne({id:targetId})
+  const targetComment = await Comment.findOne({id:targetId})
   if(option === "upVote"){
     targetComment.voteScore+=1
   } else {
     targetComment.voteScore-=1
   }
 
-  const result = Comment.findOneAndUpdate({id:targetId}, targetComment)
+  const result = await Comment.findOneAndUpdate({id:targetId}, targetComment)
 
   if(!result) {
     throw new Error("Fail to change score")
