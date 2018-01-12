@@ -46,14 +46,14 @@ class PostCard extends Component {
 
     render() {
         const p = this.props.post[this.props.id]
-        let count = 0
-        if(p && this.props.comment[p.id]){
-          if(this.props.comment[p.id]) {
-            this.props.comment[p.id].forEach((c)=>{
-              if(!c.deleted) count+=1
-            })
-          }
-        }
+        let count = p.commentCount
+        // if(p && this.props.comment[p.id]){
+        //   if(this.props.comment[p.id]) {
+        //     this.props.comment[p.id].forEach((c)=>{
+        //       if(!c.deleted) count+=1
+        //     })
+        //   }
+        // }
         return(
             <Card body className='card'>
               <CardTitle className='post-title'>

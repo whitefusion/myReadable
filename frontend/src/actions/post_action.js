@@ -17,8 +17,11 @@ export const createPost = (post) => dispatch => {
     return(
     api
     .upLoadPost(post)
-    .then(res => dispatch(addPost({...post,...res})))
-)}
+    .then(res =>{ 
+        console.log(res)
+        dispatch(addPost(res))
+    }))
+}
 
 export const editPost = ({id,title,body}) => (
     {

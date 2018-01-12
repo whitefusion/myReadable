@@ -45,12 +45,15 @@ exports.getById = async (ctx) => {
 exports.createPost = async (ctx) => {
   const newPost = ctx.request.body
   newPost._id = new mongoose.Types.ObjectId
+  newPost.commentCount = 0
+  newPost.voteScore = 0
+  newPost.deleted = false
   const result = await Post.create(newPost)
 
   if(!result) {
     throw new Error("Post fail to create")
   } else {
-    ctx.body = {message: 'Post created!', data: result}
+    ctx.body = newPost
   }
 }
 
@@ -65,7 +68,7 @@ exports.updatePost = async (ctx) => {
   if(!result) {
     throw new Error("Post fail to update")
   } else {
-    ctx.body = {message: "Post updated!", data:result}
+    ctx.body = result
   }
 }
 
@@ -77,5 +80,24 @@ exports.deletePost = async (ctx) => {
   } else {
     ctx.status= 200
     ctx.body = {message: "success!"}
+  }
+}
+
+exports.changeVote = async (ctx) => {
+  const option = ctx.request.body.option
+  const targetId = ctx.params.id
+  const targetPost = Post.findOne({id:targetId})
+  if(option === "upVote"){
+    targetPost.voteScore+=1
+  } else {
+    targetPost.voteScore-=1
+  }
+
+  const result = Post.findOneAndUpdate({id:targetId}, targetPost)
+
+  if(!result) {
+    throw new Error("Fail to change score")
+  } else {
+    ctx.body = {message:'score updated!'}
   }
 }

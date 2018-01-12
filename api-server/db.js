@@ -13,7 +13,7 @@ mongoose
   console.log(err)
 })
 
-const postSchema = mongoose.Schema({
+const postSchema = new mongoose.Schema({
     id: String,
     timestamp: Date,
     title:String,
@@ -25,4 +25,16 @@ const postSchema = mongoose.Schema({
     commentCount: Number
 })
 
+const commentSchema = new mongoose.Schema({
+    id: String,
+    parentId: String,
+    timestamp:Date,
+    author: String,
+    body: String,
+    voteScore: Number,
+    deleted: Boolean,
+    parentDeleted: Boolean
+})
+
 exports.Post = mongoose.model("Post", postSchema)
+exports.Comment = mongoose.model("Comment",commentSchema)
