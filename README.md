@@ -1,7 +1,7 @@
 # myReadable
 Readble is a prototype of online post management website. </br>
 It is based and React and Redux. </br>
-The local server is forked from [Readable Start Server](https://github.com/udacity/reactnd-project-readable-starter).
+The server is developed with Nodejs using Koa. The databse is MongoDB. </br>
 
 ![](preview/Main.png)
 ![](preview/Post.png)
@@ -14,7 +14,20 @@ The local server is forked from [Readable Start Server](https://github.com/udaci
 ## Folder Struture
 ```
 - api-server
-  [unchanged]
+  .gitignore
+  config.js
+  db.js
+  package.json
+  server.js
+  yarn.lock
+  -controller
+    category_controller.js
+    comment_controller.js
+    post_controller.js
+  -data
+    category_data.json
+    comments_data.json
+    post_data.json
 - frontend
     package-lock.json
     package.json
@@ -63,8 +76,9 @@ The local server is forked from [Readable Start Server](https://github.com/udaci
 ```
 
 ## Install and Launch
+0. Make sure you have [MongoDB server](https://www.mongodb.com) installed on your machine. You might want to configure the uri of your database at the first line of **api-server/db.js**
 1. Install dependency: Run `npm install` in *BOTH* **api-server/** and **frontend/** folder.  </br>
-2. Start Server: run `node server` under **api-server/**.
+2. Start Server: run `yarn start` under **api-server/**.
 3. Launch : In **frontend/**, run `npm start`, and you will be directed to http://localhost:3000 in your browser and see the website.
 
 ## Note
